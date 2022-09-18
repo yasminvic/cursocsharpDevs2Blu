@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32825.248
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Devs2Blu.ProjetosAula.Aula6.Jogo21", "src\Devs2Blu.ProjetosAula.Aula6.Jogo21\Devs2Blu.ProjetosAula.Aula6.Jogo21.csproj", "{1008C751-E6C2-4D8C-B986-7B348EDCA26C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Devs2Blu.ProjetosAula.Aula6.Jogo21", "src\Devs2Blu.ProjetosAula.Aula6.Jogo21\Devs2Blu.ProjetosAula.Aula6.Jogo21.csproj", "{357158DD-A140-42DD-A7CE-A5C5354D04BE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{1008C751-E6C2-4D8C-B986-7B348EDCA26C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1008C751-E6C2-4D8C-B986-7B348EDCA26C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1008C751-E6C2-4D8C-B986-7B348EDCA26C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1008C751-E6C2-4D8C-B986-7B348EDCA26C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{357158DD-A140-42DD-A7CE-A5C5354D04BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{357158DD-A140-42DD-A7CE-A5C5354D04BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{357158DD-A140-42DD-A7CE-A5C5354D04BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{357158DD-A140-42DD-A7CE-A5C5354D04BE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {7F5540DC-72AB-42BF-8675-96F6F25E2B9C}
+		SolutionGuid = {7C2C2F9C-BE17-4364-82C5-97D046DE59C8}
 	EndGlobalSection
 EndGlobal
