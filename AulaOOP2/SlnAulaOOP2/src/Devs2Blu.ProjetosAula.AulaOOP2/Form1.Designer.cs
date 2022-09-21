@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtEmail = new System.Windows.Forms.TextBox();
+            this.txtTel = new System.Windows.Forms.TextBox();
+            this.txtNome = new System.Windows.Forms.TextBox();
             this.lblEmail = new System.Windows.Forms.Label();
             this.lblTel = new System.Windows.Forms.Label();
             this.lblNome = new System.Windows.Forms.Label();
@@ -59,9 +59,9 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.Silver;
-            this.groupBox1.Controls.Add(this.textBox3);
-            this.groupBox1.Controls.Add(this.textBox2);
-            this.groupBox1.Controls.Add(this.textBox1);
+            this.groupBox1.Controls.Add(this.txtEmail);
+            this.groupBox1.Controls.Add(this.txtTel);
+            this.groupBox1.Controls.Add(this.txtNome);
             this.groupBox1.Controls.Add(this.lblEmail);
             this.groupBox1.Controls.Add(this.lblTel);
             this.groupBox1.Controls.Add(this.lblNome);
@@ -74,26 +74,26 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Contato";
             // 
-            // textBox3
+            // txtEmail
             // 
-            this.textBox3.Location = new System.Drawing.Point(101, 90);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(213, 20);
-            this.textBox3.TabIndex = 5;
+            this.txtEmail.Location = new System.Drawing.Point(101, 90);
+            this.txtEmail.Name = "txtEmail";
+            this.txtEmail.Size = new System.Drawing.Size(213, 20);
+            this.txtEmail.TabIndex = 5;
             // 
-            // textBox2
+            // txtTel
             // 
-            this.textBox2.Location = new System.Drawing.Point(101, 60);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(213, 20);
-            this.textBox2.TabIndex = 4;
+            this.txtTel.Location = new System.Drawing.Point(101, 60);
+            this.txtTel.Name = "txtTel";
+            this.txtTel.Size = new System.Drawing.Size(213, 20);
+            this.txtTel.TabIndex = 4;
             // 
-            // textBox1
+            // txtNome
             // 
-            this.textBox1.Location = new System.Drawing.Point(101, 27);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(213, 20);
-            this.textBox1.TabIndex = 3;
+            this.txtNome.Location = new System.Drawing.Point(101, 27);
+            this.txtNome.Name = "txtNome";
+            this.txtNome.Size = new System.Drawing.Size(213, 20);
+            this.txtNome.TabIndex = 3;
             // 
             // lblEmail
             // 
@@ -316,6 +316,7 @@
             this.Controls.Add(this.groupBox1);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -333,9 +334,9 @@
         private System.Windows.Forms.Label lblEmail;
         private System.Windows.Forms.Label lblTel;
         private System.Windows.Forms.Label lblNome;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtEmail;
+        private System.Windows.Forms.TextBox txtTel;
+        private System.Windows.Forms.TextBox txtNome;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtEst;
         private System.Windows.Forms.TextBox txtCid;
