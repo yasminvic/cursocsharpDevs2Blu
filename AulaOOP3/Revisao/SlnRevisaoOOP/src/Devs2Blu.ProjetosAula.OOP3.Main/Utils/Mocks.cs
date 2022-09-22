@@ -30,6 +30,8 @@ namespace Devs2Blu.ProjetosAula.OOP3.Main.Utils
         public void CargaMock()
         {
             CargaPaciente();
+            CargaMedico();
+            CargaRecepcionista();
         }
 
         public void CargaPaciente()
@@ -39,6 +41,29 @@ namespace Devs2Blu.ProjetosAula.OOP3.Main.Utils
                 Paciente paciente = new Paciente(i, $"Paciente {i}", $"{i}23{i}56{i}7891{i}", "Unimed");
                 ListaPacientes.Add(paciente);
             }
+        }
+
+        public void CargaMedico()
+        {
+            Random random = new Random();
+
+            //Medico(Int32 codigo, String nome, String cpf, Int32 crm, String especialidade)
+            for (int i = 0; i < 10; i++)
+            {
+                Medico medico = new Medico(i, $"Medico {i}", $"{i}23{i}56{i}7891{i}", random.Next(100000, 999999), "Pediatra");
+                ListaMedicos.Add(medico);
+            }
+
+        }
+
+        public void CargaRecepcionista()
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                Recepcionista recepcionista = new Recepcionista(i, $"Recepcionista {i}", $"{i}23{i}56{i}7891{i}", "Infantil");
+                ListaRecepcionistas.Add(recepcionista);
+            }  
+            
         }
     }
 }
