@@ -49,7 +49,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.lblCep = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
             this.btnEnviar = new System.Windows.Forms.Button();
             this.btnLimpar = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
@@ -67,7 +66,7 @@
             this.groupBox1.Controls.Add(this.lblNome);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.ForeColor = System.Drawing.Color.Crimson;
-            this.groupBox1.Location = new System.Drawing.Point(40, 74);
+            this.groupBox1.Location = new System.Drawing.Point(64, 150);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(362, 128);
             this.groupBox1.TabIndex = 0;
@@ -76,6 +75,7 @@
             // 
             // txtEmail
             // 
+            this.txtEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtEmail.Location = new System.Drawing.Point(101, 90);
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(213, 20);
@@ -83,6 +83,7 @@
             // 
             // txtTel
             // 
+            this.txtTel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTel.Location = new System.Drawing.Point(101, 60);
             this.txtTel.Name = "txtTel";
             this.txtTel.Size = new System.Drawing.Size(213, 20);
@@ -90,6 +91,7 @@
             // 
             // txtNome
             // 
+            this.txtNome.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtNome.Location = new System.Drawing.Point(101, 27);
             this.txtNome.Name = "txtNome";
             this.txtNome.Size = new System.Drawing.Size(213, 20);
@@ -145,7 +147,7 @@
             this.groupBox2.Controls.Add(this.lblCep);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.ForeColor = System.Drawing.Color.Crimson;
-            this.groupBox2.Location = new System.Drawing.Point(40, 233);
+            this.groupBox2.Location = new System.Drawing.Point(488, 94);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(362, 239);
             this.groupBox2.TabIndex = 1;
@@ -165,6 +167,7 @@
             // 
             // txtEst
             // 
+            this.txtEst.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtEst.Location = new System.Drawing.Point(126, 204);
             this.txtEst.Name = "txtEst";
             this.txtEst.Size = new System.Drawing.Size(213, 20);
@@ -172,6 +175,7 @@
             // 
             // txtCid
             // 
+            this.txtCid.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCid.Location = new System.Drawing.Point(126, 168);
             this.txtCid.Name = "txtCid";
             this.txtCid.Size = new System.Drawing.Size(213, 20);
@@ -179,6 +183,7 @@
             // 
             // txtBairro
             // 
+            this.txtBairro.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBairro.Location = new System.Drawing.Point(126, 136);
             this.txtBairro.Name = "txtBairro";
             this.txtBairro.Size = new System.Drawing.Size(213, 20);
@@ -186,6 +191,7 @@
             // 
             // txtNum
             // 
+            this.txtNum.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtNum.Location = new System.Drawing.Point(126, 103);
             this.txtNum.Name = "txtNum";
             this.txtNum.Size = new System.Drawing.Size(213, 20);
@@ -193,6 +199,7 @@
             // 
             // txtRua
             // 
+            this.txtRua.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtRua.Location = new System.Drawing.Point(126, 70);
             this.txtRua.Name = "txtRua";
             this.txtRua.Size = new System.Drawing.Size(213, 20);
@@ -200,6 +207,7 @@
             // 
             // txtCEP
             // 
+            this.txtCEP.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCEP.Location = new System.Drawing.Point(126, 37);
             this.txtCEP.Name = "txtCEP";
             this.txtCEP.Size = new System.Drawing.Size(213, 20);
@@ -266,55 +274,48 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Crimson;
-            this.label1.Location = new System.Drawing.Point(240, 19);
+            this.label1.Location = new System.Drawing.Point(283, 26);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(326, 33);
             this.label1.TabIndex = 2;
             this.label1.Text = "Formulário de Contato";
             // 
-            // textBox4
-            // 
-            this.textBox4.Location = new System.Drawing.Point(471, 74);
-            this.textBox4.Multiline = true;
-            this.textBox4.Name = "textBox4";
-            this.textBox4.ReadOnly = true;
-            this.textBox4.Size = new System.Drawing.Size(278, 170);
-            this.textBox4.TabIndex = 3;
-            // 
             // btnEnviar
             // 
             this.btnEnviar.BackColor = System.Drawing.Color.LightCoral;
             this.btnEnviar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEnviar.Location = new System.Drawing.Point(517, 336);
+            this.btnEnviar.Location = new System.Drawing.Point(335, 392);
             this.btnEnviar.Name = "btnEnviar";
             this.btnEnviar.Size = new System.Drawing.Size(75, 23);
             this.btnEnviar.TabIndex = 4;
             this.btnEnviar.Text = "Enviar";
             this.btnEnviar.UseVisualStyleBackColor = false;
+            this.btnEnviar.Click += new System.EventHandler(this.btnEnviar_Click);
             // 
             // btnLimpar
             // 
             this.btnLimpar.BackColor = System.Drawing.Color.LightCoral;
             this.btnLimpar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLimpar.Location = new System.Drawing.Point(612, 336);
+            this.btnLimpar.Location = new System.Drawing.Point(488, 392);
             this.btnLimpar.Name = "btnLimpar";
             this.btnLimpar.Size = new System.Drawing.Size(75, 23);
             this.btnLimpar.TabIndex = 5;
             this.btnLimpar.Text = "Limpar";
             this.btnLimpar.UseVisualStyleBackColor = false;
+            this.btnLimpar.Click += new System.EventHandler(this.btnLimpar_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 499);
+            this.ClientSize = new System.Drawing.Size(903, 477);
             this.Controls.Add(this.btnLimpar);
             this.Controls.Add(this.btnEnviar);
-            this.Controls.Add(this.textBox4);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
@@ -349,7 +350,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label lblCep;
-        private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.Button btnEnviar;
         private System.Windows.Forms.Button btnLimpar;
     }

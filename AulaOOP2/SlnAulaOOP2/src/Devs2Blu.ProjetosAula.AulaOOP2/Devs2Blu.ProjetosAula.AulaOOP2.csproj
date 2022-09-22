@@ -79,5 +79,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Devs2Blu.ProjetosAula.AulaOOP2.Classes\Devs2Blu.ProjetosAula.AulaOOP2.Classes.csproj">
+      <Project>{03af0631-b478-4975-9377-7a21a7389086}</Project>
+      <Name>Devs2Blu.ProjetosAula.AulaOOP2.Classes</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
