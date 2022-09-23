@@ -22,10 +22,6 @@ namespace Devs2Blu.ProjetosAula.OOP3.Main.Utils.Enums
         CD_FORNCEDOR = 40,
         AGENDA = 50,
         PRONTUARIO = 60,
-        FINANCEIRO = 70,
-
-        //validação
-        SIM = 100,
-        NAO = 200
+        FINANCEIRO = 70
     }
 }

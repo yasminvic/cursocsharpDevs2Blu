@@ -55,7 +55,12 @@ namespace Devs2Blu.ProjetosAula.OOP3.Main
                         ModuloCadastroRecepcionista.MenuRecepcionista();
                         break;
 
+                    case (int)MenuEnum.SAIR:
+                        Console.WriteLine("Saindo do programa...");
+                        break;
+
                     default:
+                        Console.WriteLine("Opção inváilida\n");
                         break;
                 }
 

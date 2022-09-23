@@ -126,6 +126,7 @@ namespace Devs2Blu.ProjetosAula.OOP3.Main.Cadastros
                         encontrou = true;
                         Program.Mock.ListaRecepcionistas.Remove(recepcionista);
                         Console.WriteLine("Remoção concluída com sucesso !\n");
+                        break;
                     }
                 }
                 if (encontrou == false)

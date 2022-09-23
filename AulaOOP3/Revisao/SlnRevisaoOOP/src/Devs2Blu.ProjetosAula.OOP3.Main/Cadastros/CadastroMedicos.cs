@@ -125,11 +125,12 @@ namespace Devs2Blu.ProjetosAula.OOP3.Main.Cadastros
 
                 foreach (Medico medico in Program.Mock.ListaMedicos)
                 {
-                    if (cod == medico.CodigoMedico)
+                    if (cod.Equals(medico.CodigoMedico))
                     {
                         encontrou = true;
                         Program.Mock.ListaMedicos.Remove(medico);
                         Console.WriteLine("Remoção concluída com sucesso !\n");
+                        break;
                     }
                 }
                 if (encontrou == false)

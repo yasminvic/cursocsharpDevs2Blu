@@ -26,6 +26,7 @@ namespace Devs2Blu.ProjetosAula.OOP3.Main.Cadastros
                 Console.WriteLine("| 1 - Lista de Pacientes        |");
                 Console.WriteLine("| 2 - Cadastro de Pacientes     |");
                 Console.WriteLine("| 3 - Alterar Pacientes         |");
+                Console.WriteLine("| 4 - Excluir Pacientes         |");
                 Console.WriteLine("| 0 - Sair                      |");
                 Console.WriteLine(" -------------------------------");
 
@@ -48,6 +49,10 @@ namespace Devs2Blu.ProjetosAula.OOP3.Main.Cadastros
 
                     case (int)MenuEnum.EXCLUIR:
                         ExcluirPaciente();
+                        break;
+
+                    case (int)MenuEnum.SAIR:
+                        Console.Clear();
                         break;
 
                     default:
@@ -75,7 +80,31 @@ namespace Devs2Blu.ProjetosAula.OOP3.Main.Cadastros
 
         public void CadastrarPaciente()
         {
+            int cod;
+            while (true)
+            {
+                Console.WriteLine("\nDigite seu nome: (Enter - Parar)");
+                string nome = Console.ReadLine();
 
+                if (nome.Equals(""))
+                {
+                    break;
+                }
+
+                Console.WriteLine("Digite seu código: ");
+                Int32.TryParse(Console.ReadLine(), out cod);
+
+                Console.WriteLine("Digite seu CPF: ");
+                string cpf = Console.ReadLine();
+
+                Console.WriteLine("Digite seu convênio: ");
+                string conv = Console.ReadLine();
+
+                Console.WriteLine();
+
+                Paciente paciente = new Paciente(cod,nome,cpf, conv);
+                Program.Mock.ListaPacientes.Add(paciente);
+            }
         }
 
         public void AlterarPaciente()
@@ -85,7 +114,33 @@ namespace Devs2Blu.ProjetosAula.OOP3.Main.Cadastros
 
         public void ExcluirPaciente()
         {
+            int cod;
+            bool encontrou = false;
+            while (true)
+            {
+                Console.WriteLine("\nDigite o código do paciente que deseja excluir: (0 - Parar)");
+                Int32.TryParse(Console.ReadLine(), out cod);
 
+                if (cod == (int)MenuEnum.SAIR)
+                {
+                    break;
+                }
+
+                foreach (Paciente paciente in Program.Mock.ListaPacientes)
+                {
+                    if (cod.Equals(paciente.CodigoPaciente))
+                    {
+                        encontrou = true;
+                        Program.Mock.ListaPacientes.Remove(paciente);
+                        Console.WriteLine("Remoção realizada com sucesso!");
+                        break;
+                    }
+                }
+                if (encontrou == false)
+                {
+                    Console.WriteLine("O código informado não existe ! Tente novamente");
+                }
+            }
         }
 
     }
