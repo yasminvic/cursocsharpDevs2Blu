@@ -88,6 +88,7 @@ namespace Devs2Blu.ProjetosAula.OOP3.Main.Cadastros
 
                 if (nome.Equals(""))
                 {
+                    Console.WriteLine("\n---Encerrado cadastro de pacientes---\n");
                     break;
                 }
 
@@ -123,6 +124,7 @@ namespace Devs2Blu.ProjetosAula.OOP3.Main.Cadastros
 
                 if (cod == (int)MenuEnum.SAIR)
                 {
+                    Console.WriteLine("\n---Encerrado exclusão de pacientes---\n");
                     break;
                 }
 

@@ -16,6 +16,8 @@ namespace Devs2Blu.ProjetosAula.OOP3.Main
         public static CadastroPaciente ModuloCadastroPacientes { get; set; }
         public static CadastroMedicos ModuloCadastroMedicos { get; set; }
         public static CadastroRecepcionista ModuloCadastroRecepcionista { get; set; }
+
+        public static CadastroFornecedor ModuloCadastroFornecedor { get; set; }
         static void Main(string[] args)
         {
             Mock = new Mocks();
@@ -53,6 +55,11 @@ namespace Devs2Blu.ProjetosAula.OOP3.Main
                     case (int)MenuEnum.CD_RECEPCIONISTA:
                         CadastroRecepcionista ModuloCadastroRecepcionista = new CadastroRecepcionista();
                         ModuloCadastroRecepcionista.MenuRecepcionista();
+                        break;
+
+                    case (int)MenuEnum.CD_FORNCEDOR:
+                        CadastroFornecedor ModuloCadastroFornecedor = new CadastroFornecedor();
+                        ModuloCadastroFornecedor.MenuFornecedor();
                         break;
 
                     case (int)MenuEnum.SAIR:

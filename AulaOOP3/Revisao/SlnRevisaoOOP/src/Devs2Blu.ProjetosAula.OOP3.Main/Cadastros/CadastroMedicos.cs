@@ -83,6 +83,7 @@ namespace Devs2Blu.ProjetosAula.OOP3.Main.Cadastros
 
                 if (nome == "")
                 {
+                    Console.WriteLine("\n---Encerrado cadastro de médicos---\n");
                     break;
                 }
 
@@ -120,6 +121,7 @@ namespace Devs2Blu.ProjetosAula.OOP3.Main.Cadastros
 
                 if (cod == (int)MenuEnum.SAIR)
                 {
+                    Console.WriteLine("\n---Encerrado exclusão de médicos---\n");
                     break;
                 }
 
