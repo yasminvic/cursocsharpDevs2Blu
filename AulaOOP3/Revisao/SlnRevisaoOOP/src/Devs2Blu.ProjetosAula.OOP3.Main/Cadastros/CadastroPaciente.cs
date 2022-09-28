@@ -3,67 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Devs2Blu.ProjetosAula.OOP3.Main.Interface;
 using Devs2Blu.ProjetosAula.OOP3.Main.Utils;
 using Devs2Blu.ProjetosAula.OOP3.Main.Utils.Enums;
 using Devs2Blu.ProjetosAula.OOP3.Models.Model;
 
 namespace Devs2Blu.ProjetosAula.OOP3.Main.Cadastros
 {
-    public class CadastroPaciente // classe com menu de opções e seus respectivos metodos
+    public class CadastroPaciente : IMenuCadastro // classe com menu de opções e seus respectivos metodos
     {
+        //implementamos uma interface depois dos dois pontos
         public CadastroPaciente()
         {
 
         }
-
-        public void MenuCadastro() // mock usado nos metodos
-        {
-           int opcao = 0;
-
-            do
-            {
-                Console.WriteLine(" ------------MENU---------------");
-                Console.WriteLine("| 1 - Lista de Pacientes        |");
-                Console.WriteLine("| 2 - Cadastro de Pacientes     |");
-                Console.WriteLine("| 3 - Alterar Pacientes         |");
-                Console.WriteLine("| 4 - Excluir Pacientes         |");
-                Console.WriteLine("| 0 - Sair                      |");
-                Console.WriteLine(" -------------------------------");
-
-                Console.WriteLine("Escolha uma opção do menu: ");
-                Int32.TryParse(Console.ReadLine(), out opcao);
-
-                switch (opcao)
-                {
-                    case (int)MenuEnum.LISTAR:
-                        ListarPacientes();
-                        break;
-
-                    case (int)MenuEnum.CADASTRO:
-                        CadastrarPaciente();
-                        break;
-
-                    case (int)MenuEnum.ALTERAR:
-                        AlterarPaciente();
-                        break;
-
-                    case (int)MenuEnum.EXCLUIR:
-                        ExcluirPaciente();
-                        break;
-
-                    case (int)MenuEnum.SAIR:
-                        Console.Clear();
-                        break;
-
-                    default:
-                        break;
-                }
-
-            } while (!opcao.Equals((int)MenuEnum.SAIR));
-        }
-
-
-        public void ListarPacientes()
+        private void ListarPacientes()
         {
             Console.Clear();
 
@@ -78,7 +32,7 @@ namespace Devs2Blu.ProjetosAula.OOP3.Main.Cadastros
             }
         }
 
-        public void CadastrarPaciente()
+        private void CadastrarPaciente(Paciente paciente)
         {
             int cod;
             while (true)
@@ -103,17 +57,17 @@ namespace Devs2Blu.ProjetosAula.OOP3.Main.Cadastros
 
                 Console.WriteLine();
 
-                Paciente paciente = new Paciente(cod,nome,cpf, conv);
-                Program.Mock.ListaPacientes.Add(paciente);
+                Paciente pacient = new Paciente(cod, nome, cpf, conv);
+                Program.Mock.ListaPacientes.Add(pacient);
             }
         }
 
-        public void AlterarPaciente()
+        private void AlterarPaciente(Paciente paciente)
         {
 
         }
 
-        public void ExcluirPaciente()
+        private void ExcluirPaciente(Paciente paciente)
         {
             int cod;
             bool encontrou = false;
@@ -128,12 +82,12 @@ namespace Devs2Blu.ProjetosAula.OOP3.Main.Cadastros
                     break;
                 }
 
-                foreach (Paciente paciente in Program.Mock.ListaPacientes)
+                foreach (Paciente pacient in Program.Mock.ListaPacientes)
                 {
-                    if (cod.Equals(paciente.CodigoPaciente))
+                    if (cod.Equals(pacient.CodigoPaciente))
                     {
                         encontrou = true;
-                        Program.Mock.ListaPacientes.Remove(paciente);
+                        Program.Mock.ListaPacientes.Remove(pacient);
                         Console.WriteLine("Remoção realizada com sucesso!");
                         break;
                     }
@@ -144,6 +98,54 @@ namespace Devs2Blu.ProjetosAula.OOP3.Main.Cadastros
                 }
             }
         }
+
+        public Int32 MenuCadastro() // mock usado nos metodos
+        {
+           int opcao = 0;
+
+            Console.WriteLine(" ------------MENU---------------");
+            Console.WriteLine("| 1 - Lista de Pacientes        |");
+            Console.WriteLine("| 2 - Cadastro de Pacientes     |");
+            Console.WriteLine("| 3 - Alterar Pacientes         |");
+            Console.WriteLine("| 4 - Excluir Pacientes         |");
+            Console.WriteLine("| 0 - Sair                      |");
+            Console.WriteLine(" -------------------------------");
+
+            Console.WriteLine("Escolha uma opção do menu: ");
+            Int32.TryParse(Console.ReadLine(), out opcao);
+
+            return opcao;
+        }
+
+        #region FACADE
+        public void Listar()
+        {
+            ListarPacientes(); //encapsulamos o metedo e agora estamos chamando
+        }
+
+        public void Cadastrar()
+        {
+            Paciente paciente = new Paciente();
+            CadastrarPaciente(paciente);
+        }
+
+        public void Alterar()
+        {
+            Paciente paciente = new Paciente();
+            AlterarPaciente(paciente);
+        }
+
+        public void Excluir()
+        {
+            Paciente paciente = new Paciente();
+            ExcluirPaciente(paciente);
+        }
+
+
+        
+
+        
+        #endregion
 
     }
 }

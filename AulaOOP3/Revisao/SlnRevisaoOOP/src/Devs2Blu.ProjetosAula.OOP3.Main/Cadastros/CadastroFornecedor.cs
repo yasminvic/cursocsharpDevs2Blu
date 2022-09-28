@@ -66,10 +66,10 @@ namespace Devs2Blu.ProjetosAula.OOP3.Main.Cadastros
             foreach (Fornecedor fornecedor in Program.Mock.ListaFornecedor)
             {
                 Console.WriteLine(" *******************************************");
-                Console.WriteLine($" Medico: {fornecedor.CodigoFornecedor}");
+                Console.WriteLine($" Fornecedor: {fornecedor.CodigoFornecedor}");
                 Console.WriteLine($" Nome: {fornecedor.Nome}");
                 Console.WriteLine($" CPF: {fornecedor.CGCCPF}");
-                Console.WriteLine($" Especialidade: {fornecedor.TipoFornecedor}");
+                Console.WriteLine($" Tipo: {fornecedor.TipoFornecedor}");
                 Console.WriteLine(" *******************************************\n");
             }
         }
