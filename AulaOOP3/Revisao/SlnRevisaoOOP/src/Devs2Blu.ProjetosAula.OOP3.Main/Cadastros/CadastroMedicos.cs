@@ -7,56 +7,19 @@ using System.Threading.Tasks;
 using Devs2Blu.ProjetosAula.OOP3.Models.Model;
 using System.Globalization;
 using Devs2Blu.ProjetosAula.OOP3.Main.Utils;
+using Devs2Blu.ProjetosAula.OOP3.Main.Interface;
 
 namespace Devs2Blu.ProjetosAula.OOP3.Main.Cadastros
 {
-    public class CadastroMedicos 
+    public class CadastroMedicos : IMenuCadastro
     {
+
         public CadastroMedicos()
         {
 
         }
 
-        public void MenuMedicos()
-        {
-            int opcao = 0;
-
-            do
-            {
-                Console.WriteLine(" ------------MENU---------------");
-                Console.WriteLine("| 1 - Lista de Médico           |");
-                Console.WriteLine("| 2 - Cadastro de Médicos       |");
-                Console.WriteLine("| 3 - Alterar Médicos           |");
-                Console.WriteLine("| 4 - Excluir Médicos           |");
-                Console.WriteLine("| 0 - Sair                      |");
-                Console.WriteLine(" -------------------------------");
-
-                Console.WriteLine("Escolha uma das opções do menu: ");
-                Int32.TryParse(Console.ReadLine(), out opcao);
-
-                switch (opcao)
-                {
-                    case (int)MenuEnum.LISTAR:
-                        ListarMedicos();
-                        break;
-
-                    case (int)MenuEnum.CADASTRO:
-                        CadastrarMedico();
-                        break;
-
-                    case (int)MenuEnum.EXCLUIR:
-                        ExcluirMedicos();
-                        break;
-
-                    default:
-                        break;
-
-                }
-
-            } while (!opcao.Equals((int)MenuEnum.SAIR));
-        }
-
-        public void ListarMedicos()
+        private void ListarMedicos()
         {
             foreach (Medico medico in Program.Mock.ListaMedicos)
             {
@@ -70,7 +33,7 @@ namespace Devs2Blu.ProjetosAula.OOP3.Main.Cadastros
             }
         }
 
-        public void CadastrarMedico()
+        private void CadastrarMedico()
         {
             //Medico(Int32 codigo, String nome, String cpf, Int32 crm, String especialidade)
             int cod, crm;
@@ -105,12 +68,12 @@ namespace Devs2Blu.ProjetosAula.OOP3.Main.Cadastros
             }
         }
 
-        public void AlterarMedicos()
+        private void AlterarMedicos()
         {
 
         }
 
-        public void ExcluirMedicos()
+        private void ExcluirMedicos()
         {
             int cod;
             bool encontrou = false;
@@ -141,5 +104,45 @@ namespace Devs2Blu.ProjetosAula.OOP3.Main.Cadastros
                 }
             }
         }
+
+
+
+
+        public void Cadastrar()
+        {
+            CadastrarMedico();
+        }
+
+        public void Alterar()
+        {
+            AlterarMedicos();
+        }
+
+        public void Excluir()
+        {
+           ExcluirMedicos();    
+        }
+
+        public Int32 MenuCadastro()
+        {
+            Int32 opcao;
+            Console.WriteLine(" ------------MENU---------------");
+            Console.WriteLine("| 1 - Lista de Médico           |");
+            Console.WriteLine("| 2 - Cadastro de Médicos       |");
+            Console.WriteLine("| 3 - Alterar Médicos           |");
+            Console.WriteLine("| 4 - Excluir Médicos           |");
+            Console.WriteLine("| 0 - Sair                      |");
+            Console.WriteLine(" -------------------------------");
+
+            Console.WriteLine("Escolha uma das opções do menu: ");
+            Int32.TryParse(Console.ReadLine(), out opcao);
+            return opcao;
+        }
+           
+        public void Listar()
+        {
+            ListarMedicos();
+        }
+        
     }
 }
