@@ -1,9 +1,5 @@
-<<<<<<< HEAD
-﻿using System;
-=======
-﻿using Devs2Blu.ProjetosAula.OOP3.Models.Model;
 using System;
->>>>>>> 3272320514e59a70c1273e00a87c1067a7192dfb
+﻿using Devs2Blu.ProjetosAula.OOP3.Models.Model;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
