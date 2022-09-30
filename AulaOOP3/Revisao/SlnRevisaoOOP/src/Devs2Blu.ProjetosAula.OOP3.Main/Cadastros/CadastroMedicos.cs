@@ -105,9 +105,6 @@ namespace Devs2Blu.ProjetosAula.OOP3.Main.Cadastros
             }
         }
 
-
-
-
         public void Cadastrar()
         {
             CadastrarMedico();
@@ -143,6 +140,5 @@ namespace Devs2Blu.ProjetosAula.OOP3.Main.Cadastros
         {
             ListarMedicos();
         }
-
     }
 }

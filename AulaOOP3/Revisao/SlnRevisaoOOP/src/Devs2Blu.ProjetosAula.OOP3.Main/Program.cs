@@ -25,7 +25,6 @@ namespace Devs2Blu.ProjetosAula.OOP3.Main
             {
                 if (opcMenuCadastros.Equals((int)MenuEnum.SAIR))
                 {
-
                     Console.WriteLine(" ---------------MENU----------------");
                     Console.WriteLine("| 10 - Cadastro de Pacientes        |");
                     Console.WriteLine("| 20 - Cadastro de Médicos          |");
@@ -41,6 +40,7 @@ namespace Devs2Blu.ProjetosAula.OOP3.Main
                     Int32.TryParse(Console.ReadLine(), out opcao);
 
                     Console.Clear();
+
                 }
 
                 switch (opcao)

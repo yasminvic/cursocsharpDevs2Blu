@@ -35,6 +35,7 @@ namespace Devs2Blu.ProjetosAula.OOP3.Main.Cadastros
         }
 
         private void CadastrarPaciente()
+
         {
             Console.WriteLine("----CADASTRO DE PACIENTES----");
             while (true)
@@ -79,19 +80,19 @@ namespace Devs2Blu.ProjetosAula.OOP3.Main.Cadastros
 
                 //criar um for
 
-                switch (opc)
+               /* switch (opc)
                 {
                     case "1":
                         Console.Clear();
                         Console.WriteLine("Digite o novo nome: ");
                         paciente
-                }
+                }*/
             }
         }
 
+
         private void ExcluirPaciente()
         {
-            Console.WriteLine("----EXCLUIR PACIENTES----");
 
             int cod;
             bool encontrou = false;
@@ -106,12 +107,12 @@ namespace Devs2Blu.ProjetosAula.OOP3.Main.Cadastros
                     break;
                 }
 
-                foreach (Paciente paciente in Program.Mock.ListaPacientes)
+                foreach (Paciente pacient in Program.Mock.ListaPacientes)
                 {
-                    if (cod.Equals(paciente.CodigoPaciente))
+                    if (cod.Equals(pacient.CodigoPaciente))
                     {
                         encontrou = true;
-                        Program.Mock.ListaPacientes.Remove(paciente);
+                        Program.Mock.ListaPacientes.Remove(pacient);
                         Console.WriteLine("Remoção realizada com sucesso!");
                         break;
                     }
@@ -123,12 +124,9 @@ namespace Devs2Blu.ProjetosAula.OOP3.Main.Cadastros
             }
         }
 
-
-
         public Int32 MenuCadastro() // mock usado nos metodos
         {
-            int opcao = 0;
-
+           int opcao = 0;
             Console.WriteLine(" ------------MENU---------------");
             Console.WriteLine("| 1 - Lista de Pacientes        |");
             Console.WriteLine("| 2 - Cadastro de Pacientes     |");
@@ -140,10 +138,10 @@ namespace Devs2Blu.ProjetosAula.OOP3.Main.Cadastros
             Console.WriteLine("Escolha uma opção do menu: ");
             Int32.TryParse(Console.ReadLine(), out opcao);
 
+
             Console.Clear();
 
             return opcao;
-            
         }
 
         #region FACADE
@@ -156,7 +154,6 @@ namespace Devs2Blu.ProjetosAula.OOP3.Main.Cadastros
         {
             //Paciente novopaciente = new Paciente();
             CadastrarPaciente();
-
         }
 
         public void Alterar()
@@ -167,10 +164,12 @@ namespace Devs2Blu.ProjetosAula.OOP3.Main.Cadastros
 
         public void Excluir()
         {
-            ExcluirPaciente();
+            ExcluirPaciente();     
         }
+
 
         #endregion
 
     }
 }
+
