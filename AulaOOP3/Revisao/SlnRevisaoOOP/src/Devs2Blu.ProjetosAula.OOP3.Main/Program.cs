@@ -40,7 +40,6 @@ namespace Devs2Blu.ProjetosAula.OOP3.Main
                     Int32.TryParse(Console.ReadLine(), out opcao);
 
                     Console.Clear();
-
                 }
 
                 switch (opcao)
@@ -52,6 +51,16 @@ namespace Devs2Blu.ProjetosAula.OOP3.Main
 
                     case (int)MenuEnum.CD_MEDICO:
                         menuCadastros = new CadastroMedicos();
+                        opcMenuCadastros = menuCadastros.MenuCadastro();
+                        break;
+
+                    case (int)MenuEnum.CD_RECEPCIONISTA:
+                        menuCadastros = new CadastroRecepcionista();
+                        opcMenuCadastros = menuCadastros.MenuCadastro();
+                        break;
+
+                    case (int)MenuEnum.CD_FORNCEDOR:
+                        menuCadastros = new CadastroFornecedor();
                         opcMenuCadastros = menuCadastros.MenuCadastro();
                         break;
 
@@ -83,10 +92,7 @@ namespace Devs2Blu.ProjetosAula.OOP3.Main
                         opcMenuCadastros = (int)MenuEnum.SAIR;
                         break;
                 }
-
             } while (!opcao.Equals((int)MenuEnum.SAIR));
-
         }
-
     }
 }

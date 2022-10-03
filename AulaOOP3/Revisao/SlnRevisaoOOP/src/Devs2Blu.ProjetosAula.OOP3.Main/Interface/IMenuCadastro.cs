@@ -11,7 +11,7 @@ namespace Devs2Blu.ProjetosAula.OOP3.Main.Interface
    public interface IMenuCadastro
 
     {
-        //metodos obrigatórios, que nao importa como tem que ser implementado
+        //metodos obrigatórios
         //tudo que estiver na interface tem que estar na classe
 
         Int32 MenuCadastro();

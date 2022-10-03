@@ -27,9 +27,6 @@ namespace Devs2Blu.ProjetosAula.OOP3.Models.Model
 
             Random rd = new Random();
             CodigoRecepcionista = Int32.Parse($"{codigo}{rd.Next(100, 999)}");
-        }
-      
-      
+        } 
     }
-
 }
