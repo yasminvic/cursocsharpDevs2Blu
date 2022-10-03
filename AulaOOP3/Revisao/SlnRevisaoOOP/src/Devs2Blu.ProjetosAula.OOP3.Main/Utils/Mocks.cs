@@ -10,13 +10,10 @@ namespace Devs2Blu.ProjetosAula.OOP3.Main.Utils
     public class Mocks // classe para testar as outras classes, gera vários objetos
     {
         public List<Paciente> ListaPacientes { get; set; }
-
         public  List<Medico> ListaMedicos { get; set; }
-
         public  List<Fornecedor> ListaFornecedor { get; set; }
-
         public  List<Recepcionista> ListaRecepcionistas { get; set; }
-
+       
         public Mocks()
         {
             ListaPacientes = new List<Paciente>();
@@ -26,7 +23,6 @@ namespace Devs2Blu.ProjetosAula.OOP3.Main.Utils
 
             CargaMock(); // chama todos os metodos que geram os objetos
         }
-
         public void CargaMock()
         {
             CargaPaciente();
@@ -43,12 +39,9 @@ namespace Devs2Blu.ProjetosAula.OOP3.Main.Utils
                 ListaPacientes.Add(paciente);
             }
         }
-
         public void CargaMedico()
         {
             Random random = new Random();
-
-            //Medico(Int32 codigo, String nome, String cpf, Int32 crm, String especialidade)
             for (int i = 0; i < 10; i++)
             {
                 Medico medico = new Medico(i, $"Medico {i}", $"{i}23{i}56{i}7891{i}", random.Next(100000, 999999), "Pediatra");
@@ -56,7 +49,6 @@ namespace Devs2Blu.ProjetosAula.OOP3.Main.Utils
             }
 
         }
-
         public void CargaRecepcionista()
         {
             for (int i = 0; i < 10; i++)
@@ -66,13 +58,11 @@ namespace Devs2Blu.ProjetosAula.OOP3.Main.Utils
             }  
             
         }
-
         public void CargaFornecedor()
         {
-            //Fornecedor(Int32 codigo, String nome, String cpf, String tipoFornecedor)
             for (int i = 0; i < 10; i++)
             {
-                Fornecedor fornecedor = new Fornecedor(i, $"Fornecedor {i}", $"{i}23{i}56{i}7891{i}", "Comida");
+                Fornecedor fornecedor = new Fornecedor(i, $"Fornecedor {i}", $"{i}23{i}56{i}7891{i}", "Alimentício");
                 ListaFornecedor.Add(fornecedor);
             }
         }
