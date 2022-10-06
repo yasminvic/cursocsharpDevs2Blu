@@ -22,19 +22,19 @@ namespace Devs2Blu.ProjetosAula.SistemaCadastro.Forms.Data
             Server = "localhost";
             DataBase = "sistemacadastro"; //nome do banco de dados
             User = "root";
-            Password = "root";
+            Password = "gibi2016";
             ConectionString = $"Persist Security Info=False;server={Server};database={DataBase};uid={User};server={Server};database={DataBase};uid={User};pwd='{Password}'";
-            var conn = new MySqlConnection(ConectionString);//retorna tipo mysqlConnection
+            var conn = new MySqlConnection(ConectionString);//retorna tipo mysqlConnection, vai fazer conexão
 
             //vai tentar conectar o mysql
             try
             {
-                conn.Open();
+                conn.Open(); // vai abrir a conexão
             }
             //se não vai mostrar mensagem de erro
             catch (MySqlException myex)
             {
-                MessageBox.Show(myex.Message, "Erro ao Conectar");
+                MessageBox.Show(myex.Message, "Erro ao Conectar", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 throw;
             }
 
