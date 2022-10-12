@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{33BB0F77-1CA5-47E7-8B1D-FAFA6F82D0DC}</ProjectGuid>
+    <ProjectGuid>{E0666D4D-034B-4564-980B-4766A5A5D846}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>Devs2Blu.ProjetosAula.SistemaCadastro.Forms</RootNamespace>
-    <AssemblyName>Devs2Blu.ProjetosAula.SistemaCadastro.Forms</AssemblyName>
+    <RootNamespace>Devs2Blu.ProjetosAula.AulaOOP1Int</RootNamespace>
+    <AssemblyName>Devs2Blu.ProjetosAula.AulaOOP1Int</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -33,13 +33,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Correios, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Correios-Api.1.1.1\lib\portable-net45+win\Correios.dll</HintPath>
-    </Reference>
-    <Reference Include="MySql.Data, Version=8.0.30.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -51,31 +46,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\ConnectionMySQL.cs" />
-    <Compile Include="Data\ConvenioRepository.cs" />
-    <Compile Include="Data\EnderecoRepository.cs" />
-    <Compile Include="Data\PacienteRepository.cs" />
-    <Compile Include="Data\PessoaRepository.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form2.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form2.Designer.cs">
-      <DependentUpon>Form2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Interface\IComanndSQL.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form2.resx">
-      <DependentUpon>Form2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -85,9 +65,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -100,27 +78,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Devs2Blu.ProjetosAula.OOP3.Models\Devs2Blu.ProjetosAula.SistemaCadastro.Models.csproj">
-      <Project>{c42adbd2-c88d-4ba1-ada2-0f5c70a5f229}</Project>
-      <Name>Devs2Blu.ProjetosAula.SistemaCadastro.Models</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\save.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\info.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\info_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\delete.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\clean.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

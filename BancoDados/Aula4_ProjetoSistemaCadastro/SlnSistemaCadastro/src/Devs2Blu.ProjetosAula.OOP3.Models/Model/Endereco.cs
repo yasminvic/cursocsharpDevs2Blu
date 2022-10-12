@@ -20,12 +20,11 @@ namespace Devs2Blu.ProjetosAula.OOP3.Models.Model
 
         public Endereco()
         {
-
+            Pessoa = new Pessoa();
         }
 
-        public Endereco(int id, Pessoa pessoa, string cEP, string rua, int numero, string bairro, string cidade, string uF)
+        public Endereco(Pessoa pessoa, string cEP, string rua, int numero, string bairro, string cidade, string uF)
         {
-            Id = id;
             Pessoa = pessoa;
             CEP = cEP;
             Rua = rua;

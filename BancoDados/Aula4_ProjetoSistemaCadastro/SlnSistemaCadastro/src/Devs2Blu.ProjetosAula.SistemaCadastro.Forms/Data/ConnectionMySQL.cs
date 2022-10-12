@@ -23,7 +23,10 @@ namespace Devs2Blu.ProjetosAula.SistemaCadastro.Forms.Data
             DataBase = "sistemacadastro"; //nome do banco de dados
             User = "root";
             Password = "gibi2016";
+
+            // fonte de dados
             ConectionString = $"Persist Security Info=False;server={Server};database={DataBase};uid={User};server={Server};database={DataBase};uid={User};pwd='{Password}'";
+            //cria conexão com mysql
             var conn = new MySqlConnection(ConectionString);//retorna tipo mysqlConnection, vai fazer conexão
 
             //vai tentar conectar o mysql

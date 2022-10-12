@@ -17,6 +17,8 @@ namespace Devs2Blu.ProjetosAula.SistemaCadastro.Forms.Data
             try
             {
                 MySqlCommand cmd = new MySqlCommand(SQL_SELECT_Convenio, conn); //vai executar a query nessa conexão (pode ter varias)
+                                                   //comando        //conexão que possibilita comando
+
                 MySqlDataReader dataReader = cmd.ExecuteReader();
                 return dataReader; //retorna tudo oq estiver na base
             }
