@@ -1,0 +1,1 @@
+UPDATE estados SET uf='RS' WHERE id=20;

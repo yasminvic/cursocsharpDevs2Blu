@@ -1,0 +1,9 @@
+DELETE FROM endereco WHERE id=1;
+DELETE FROM endereco WHERE id=2;
+DELETE FROM endereco WHERE id=4;
+DELETE FROM endereco WHERE id=5;
+DELETE FROM endereco WHERE id=6;
+DELETE FROM endereco WHERE id=7;
+DELETE FROM endereco WHERE id=12;
+DELETE FROM endereco WHERE id=20;
+DELETE FROM endereco WHERE id=21;
