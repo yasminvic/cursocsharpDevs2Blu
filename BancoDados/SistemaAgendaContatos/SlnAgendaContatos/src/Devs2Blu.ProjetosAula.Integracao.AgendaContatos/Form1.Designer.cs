@@ -201,7 +201,6 @@
             // dataGridViewImageColumn1
             // 
             this.dataGridViewImageColumn1.HeaderText = "Adicionar";
-            this.dataGridViewImageColumn1.Image = global::Devs2Blu.ProjetosAula.Integracao.AgendaContatos.Properties.Resources.add_event;
             this.dataGridViewImageColumn1.Name = "dataGridViewImageColumn1";
             this.dataGridViewImageColumn1.ReadOnly = true;
             this.dataGridViewImageColumn1.ToolTipText = "Clique aqui para Adicionar um Compromisso ao Contato";
@@ -210,7 +209,6 @@
             // dataGridViewImageColumn2
             // 
             this.dataGridViewImageColumn2.HeaderText = "";
-            this.dataGridViewImageColumn2.Image = global::Devs2Blu.ProjetosAula.Integracao.AgendaContatos.Properties.Resources.delete;
             this.dataGridViewImageColumn2.Name = "dataGridViewImageColumn2";
             this.dataGridViewImageColumn2.ReadOnly = true;
             this.dataGridViewImageColumn2.ToolTipText = "Clique aqui para Deletar um Contato";
@@ -219,7 +217,6 @@
             // dataGridViewImageColumn3
             // 
             this.dataGridViewImageColumn3.HeaderText = "";
-            this.dataGridViewImageColumn3.Image = global::Devs2Blu.ProjetosAula.Integracao.AgendaContatos.Properties.Resources.document_edit;
             this.dataGridViewImageColumn3.Name = "dataGridViewImageColumn3";
             this.dataGridViewImageColumn3.ReadOnly = true;
             this.dataGridViewImageColumn3.ToolTipText = "Clique aqui para Editar um Contato";
@@ -228,7 +225,6 @@
             // dataGridViewImageColumn4
             // 
             this.dataGridViewImageColumn4.HeaderText = "";
-            this.dataGridViewImageColumn4.Image = global::Devs2Blu.ProjetosAula.Integracao.AgendaContatos.Properties.Resources.delete;
             this.dataGridViewImageColumn4.Name = "dataGridViewImageColumn4";
             this.dataGridViewImageColumn4.ToolTipText = "Clique aqui para Deletar um compromisso";
             this.dataGridViewImageColumn4.Width = 30;
@@ -236,7 +232,6 @@
             // dataGridViewImageColumn5
             // 
             this.dataGridViewImageColumn5.HeaderText = "";
-            this.dataGridViewImageColumn5.Image = global::Devs2Blu.ProjetosAula.Integracao.AgendaContatos.Properties.Resources.document_edit;
             this.dataGridViewImageColumn5.Name = "dataGridViewImageColumn5";
             this.dataGridViewImageColumn5.ToolTipText = "Clique aqui para Alterar um compromisso";
             this.dataGridViewImageColumn5.Width = 30;

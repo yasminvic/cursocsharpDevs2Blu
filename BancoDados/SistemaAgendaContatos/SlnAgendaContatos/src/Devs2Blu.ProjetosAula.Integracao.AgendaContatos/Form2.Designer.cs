@@ -79,7 +79,7 @@
             // 
             // timeFim
             // 
-            this.timeFim.CustomFormat = "dd/MM/yyyyy     hh:mm";
+            this.timeFim.CustomFormat = "dd/MM/yyyyy     HH:mm";
             this.timeFim.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.timeFim.Location = new System.Drawing.Point(93, 159);
             this.timeFim.Name = "timeFim";
@@ -88,7 +88,7 @@
             // 
             // timeInicio
             // 
-            this.timeInicio.CustomFormat = "dd/MM/yyyyy     hh:mm";
+            this.timeInicio.CustomFormat = "dd/MM/yyyyy     HH:mm";
             this.timeInicio.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.timeInicio.Location = new System.Drawing.Point(95, 128);
             this.timeInicio.Name = "timeInicio";
@@ -297,11 +297,11 @@
             // 
             this.btnSalvarComp.BackColor = System.Drawing.SystemColors.ControlDark;
             this.btnSalvarComp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSalvarComp.Image = global::Devs2Blu.ProjetosAula.Integracao.AgendaContatos.Properties.Resources.save1;
+            this.btnSalvarComp.Image = global::Devs2Blu.ProjetosAula.Integracao.AgendaContatos.Properties.Resources.salvar;
             this.btnSalvarComp.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnSalvarComp.Location = new System.Drawing.Point(95, 447);
             this.btnSalvarComp.Name = "btnSalvarComp";
-            this.btnSalvarComp.Size = new System.Drawing.Size(140, 46);
+            this.btnSalvarComp.Size = new System.Drawing.Size(146, 46);
             this.btnSalvarComp.TabIndex = 1;
             this.btnSalvarComp.Text = "Salvar Compromisso";
             this.btnSalvarComp.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -355,8 +355,8 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Button btnSalvarComp;
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Button btnSalvarComp;
     }
 }

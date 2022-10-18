@@ -264,7 +264,7 @@
             this.btnSalvar.BackColor = System.Drawing.SystemColors.ControlDark;
             this.btnSalvar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnSalvar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSalvar.Image = global::Devs2Blu.ProjetosAula.Integracao.AgendaContatos.Properties.Resources.save1;
+            this.btnSalvar.Image = global::Devs2Blu.ProjetosAula.Integracao.AgendaContatos.Properties.Resources.save;
             this.btnSalvar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnSalvar.Location = new System.Drawing.Point(84, 309);
             this.btnSalvar.Name = "btnSalvar";
