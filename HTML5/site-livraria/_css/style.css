@@ -49,6 +49,11 @@ header#topo {
     margin-top: 80px;
 }
 
+.wrapper section#banner a{
+    text-decoration: none;
+    color: #111;
+}
+
 .wrapper figure{
     display: table;
     margin: auto 20px;
