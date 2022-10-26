@@ -25,9 +25,6 @@ header.cabecalho {
     height: 80px;
     display: inline-flex;
     line-height: 100px;
-}
-
-.cabecalho figure {
     color: #fff;
 }
 
