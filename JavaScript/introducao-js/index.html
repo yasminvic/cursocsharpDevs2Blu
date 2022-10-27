@@ -5,19 +5,61 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Introdução JS</title>
-    <style>
-        #bloco {
-            display: block;
-            border: 1px solid #000;
-            height: 100px;
-            width: 100px;
-            background-color: blueviolet;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="bloco">
+    <div class="hidden" id="bloco">
         <span>bloco</span>
+    </div>
+
+    <div id="formulario">
+        <header>
+            <h2>Contato</h2>
+        </header>
+        <div class="container">
+            <fieldset class="form-contato">
+                <legend>Formulario de Contato</legend>
+                <form onsubmit="return false">
+                <div class="control-group">
+                    <label for="nome">Nome</label>
+                    <input type="text" id="nome" class="control">
+                </div>
+                <div class="control-group">
+                    <label for="telefone">Telefone</label>
+                    <input type="text" id="telefone" class="control">
+                </div>
+                <div class="control-group">
+                    <label for="cep">CEP</label>
+                    <input type="text" id="cep" class="control">
+                </div>
+                <div id="endereco">
+                    <div class="control-group">
+                        <label for="rua">Rua</label>
+                        <input type="text" name="rua" class="control" id="rua">
+                    </div>
+                    <div class="control-group">
+                        <label for="numero">Numero</label>
+                        <input type="text" name="numero" class="control" id="numero">
+                    </div>
+                    <div class="control-group">
+                        <label for="bairro">Bairro</label>
+                        <input type="text" name="bairro" class="control" id="bairro">
+                    </div>
+                    <div class="control-group">
+                        <label for="cidade">Cidade</label>
+                        <input type="text" name="cidade" class="control" id="cidade">
+                    </div>
+                    <div class="control-group">
+                        <label for="uf">UF</label>
+                        <input type="text" name="uf" class="control" id="uf">
+                    </div>
+                </div>
+                <div class="control-group controles-form">
+                    <button id="btn-salvar" class="btn btn-success" type="submit">Salvar</button>
+                </div>
+            </form>
+            </fieldset>
+        </div>
     </div>
 
     <script type="text/javascript">
