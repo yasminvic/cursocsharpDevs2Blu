@@ -1,0 +1,71 @@
+@charset "UTF-8";
+
+.bg-customized {
+    background-color: #f77f00;
+}
+
+#conteudo{
+    width: 95vw;
+    margin: 1em auto;
+}
+
+#destaque img{
+    height: 40em;
+}
+
+/*MAIN*/
+main#main-content{
+    display: block;
+    width: 90vw;
+    margin: 3em auto;
+    margin-top: 10em;
+    margin-bottom: 5em;
+}
+
+main#main-content section#lista-cantor{
+    border:  1px solid #111;
+    box-shadow: 2px 1px 3px #111;
+    background-color: #fff;
+    width: 80vw;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5em;
+}
+
+main#main-content h2{
+    text-align: center;
+    font-size: 25pt;
+    background-color: #fcbf49;
+    height: 4vw;
+    padding-top: .2em;
+    margin: 1em 3em;
+}
+
+main#main-content div.cantor{
+    margin: auto auto;
+    margin-top: 2em;
+    width: 60vw;
+}
+
+main#main-content div.cantor:hover{
+    -webkit-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    transform: scale(1.1);
+}
+
+main#main-content img{
+    width: 300px;
+    height: 200px;
+    padding-right: 1em;
+    
+}
+
+
+/*FOOTER*/
+footer{
+    border-top: 1px solid #111;
+    text-align: center;
+    font-style: italic;
+    font-size: 12px;
+}
+
