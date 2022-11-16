@@ -14,10 +14,10 @@ const getAPI = (url, functionCallback) =>{ //pega a url e depois executa essa fu
     //o segundo pega o retorno e usa ele como parametro para outra função
     fetch(url).then(
                     (response) => response.json(), //retorno deu certo
-                    (error) => console.error(error) //requisão foi rejeitada
+                    (error) => console.log(error) //requisão foi rejeitada
                     ).then(
-                            dataJson => functionCallback(dataJson), //retorno deu certo
-                            erro => console.error(erro) //requisão rejeitada
+                            (dataJson) => functionCallback(dataJson), //retorno deu certo
+                            (erro) => console.log(erro) //requisão rejeitada
                             );
 }
 

@@ -8,6 +8,8 @@ addEventListener('load', function(){
                             //o parametro dessa função está sendo passado lá função getAPI
 });
 
+
+
 const criaListaCharacter = (data) =>{
     let main = getElement('main');
 
@@ -17,8 +19,9 @@ const criaListaCharacter = (data) =>{
     //pra cada personagem dentro de results dentro de data
     data.results.forEach(character => {
         let html = document.createElement('div'); //div do card
-        html.classList.add('card', 'col-4', 'my-4', 'bg-dark'); //add varias classes de uma vez com js, usando jquery é de outro jeito
+        html.classList.add('card', 'col-3', 'my-4', 'bg-dark', 'ms-1'); //add varias classes de uma vez com js, usando jquery é de outro jeito
         
+        //se clicar no card, executa essa função que faz aparecer o modal
         html.addEventListener('click', () => mostraDetalhesCharacter(character)); //passando uma function
 
         let htmlBody = `
@@ -35,7 +38,10 @@ const criaListaCharacter = (data) =>{
         listCharacter.push(character);//appendando personagem dentro da lista
 
     });
+    //assim que carregar a api, gerar a paginação tbm
+    gerarPaginacao(data.info);
 }
+
 
 const mostraDetalhesCharacter = (character) =>{
     let div = document.createElement('div'); //cria div
@@ -71,19 +77,64 @@ const mostraDetalhesCharacter = (character) =>{
 
     //.modal é um recurso do bootstrap, que utiliza JQuery, por isso foi preciso colocar $
     $('#charModal').modal('show'); //abre caixinha pro personagem quando clicar nele
+};
 
-    /*const chara = {
-        id: character.id,
-        name: character.name,
-        status: character.status,
-        species: character.species,
-        type: character.type,
-        gender: character.gender,
-        origin: character.origin,
-        location: character.location,
-        image: character.image,
-        episode:character.episode,
-        url: character.url,
-        created: character.created,
-    };*/
+
+const gerarPaginacao = (info, currentPage=null) =>{
+    let pag = getElement('#pagination'); // pegando a paginação lá embaixo
+    
+    pag.innerHTML = ""; //toda vez que gerar, apagar o conteudo antigo para nao repetir
+
+    //criando previous na pagination
+    let prevItem = novoItemPagination(info.prev, 'Previous');
+    pag.appendChild(prevItem);//add item previous dentro da tag ul
+    
+    let indexPagination = (currentPage && currentPage > 5) ? currentPage - 5: 0; 
+
+    //enquanto index for menor que o numero de páginas
+    for (let index = indexPagination; index < info.pages; index++){
+        //mostra os 5 primeiros
+        if (currentPage == null && index < 5){
+            //add item numero da pag
+            let liItemPag = novoItemPagination(`${URL_API_CHARACTER}?page=${index +1}`, `${index+1}`);
+            pag.appendChild(liItemPag); //add os numeros na pagination em si, na ul
+        }
+        //mostra os 5 últimos
+        if (currentPage == null && index > (info.pages - 5) && index < info.pages){
+            //add item numero da pag
+            let liItemPag = novoItemPagination(`${URL_API_CHARACTER}?page=${index +1}`, `${index+1}`);
+            pag.appendChild(liItemPag); //add os numeros na pagination em si, na ul
+        }
+
+
+        //item clicado 
+        if (currentPage && !(indexPagination < (currentPage) && indexPagination < (info.pages - 5))){
+            //add item numero da pag
+            let liItemPag = novoItemPagination(`${URL_API_CHARACTER}?page=${index +1}`, `${index+1}`);
+            pag.appendChild(liItemPag); //add os numeros na pagination em si, na ul
+        }
+    }
+
+    //add item next 
+    let nextItem = novoItemPagination(info.next, 'Next');
+    pag.appendChild(nextItem); //add previous no nav
 }
+
+const novoItemPagination = (url, index) =>{
+    //criando cada item da pagination
+    let liItem = document.createElement('li');
+    liItem.classList.add('page-item'); //estilizando li
+    liItem.innerHTML = `<a onclick="irItemPaginacao('${url}')" class="page-link" href="#">${index}</a>`; //criando o link para cada pagina
+    return liItem;
+}
+
+const irItemPaginacao = (url) =>{
+
+}
+
+let info = {
+    count: 826,
+    pages: 42,
+    next: "https://rickandmortyapi.com/api/character/?page=2",
+    prev: null
+  };
