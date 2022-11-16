@@ -74,6 +74,11 @@ const listaCharacters = (title) =>{
             cor = 0;
         }
 
+        if (casa === ""){
+            casa = 'Sem casa';
+            cor = 'light';
+        }
+
         //criando html
         let card = document.createElement('div');
         let cardBody = `<div class="card-header bg-dark border-bottom border-light carta-header">
@@ -118,37 +123,37 @@ const criaModal = (character) =>{
                         <ol class="list-group list-group-numbered">
                         <li class="list-group-item d-flex justify-content-between align-items-start">
                         <div class="ms-2 me-auto">
-                            <div class="fw-bold">Espécie</div>
+                            <div class="fw-bold">Specie</div>
                             ${character.species}
                         </div>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-start">
                         <div class="ms-2 me-auto">
-                            <div class="fw-bold">Gênero</div>
+                            <div class="fw-bold">Gender</div>
                             ${character.gender}
                         </div>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-start">
                         <div class="ms-2 me-auto">
-                            <div class="fw-bold">Casa</div>
+                            <div class="fw-bold">House</div>
                             ${character.house}
                         </div>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-start">
                         <div class="ms-2 me-auto">
-                            <div class="fw-bold">Data de Nascimento</div>
+                            <div class="fw-bold">Date of Birth</div>
                             ${character.dateOfBirth}
                         </div>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-start">
                         <div class="ms-2 me-auto">
-                            <div class="fw-bold">Ancestralidade</div>
+                            <div class="fw-bold">Ancestry</div>
                             ${character.ancestry}
                         </div>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-start">
                         <div class="ms-2 me-auto">
-                            <div class="fw-bold">Patrono</div>
+                            <div class="fw-bold">Patronus</div>
                             ${character.patronus}
                         </div>
                         </li>
