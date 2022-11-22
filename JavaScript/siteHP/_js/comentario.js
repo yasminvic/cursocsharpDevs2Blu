@@ -20,24 +20,36 @@ const comentarioBtn = (nome_character) =>{
     setJSONItem(LISTA_COM, listCom);
 
     alert('Comentário postado com sucesso !');
-    nome.val() = '';
-    desc.val() = '';
+    // nome.val() = '';
+    // desc.val() = '';
 };
 
 const mostraComentarios = (nome_character) =>{
     let div = document.createElement('div');
+    div.classList.add('border', 'p-3', 'mb-5', 'mt-5');
+
+    let h3 = `<h3 class="title-coment">Comentários</h3>`;
+
+    div.innerHTML = h3;
 
     //pega os comentarios da localstorage
     listCom = getJSONItem(LISTA_COM);
+
+    if(listCom == null){
+        listCom = new Array();
+    };
 
     listCom.forEach((comentario) => {
         //se o comentario for sobre o personagem que na pag estamos, entao mostra esse comentario
         if (comentario.nomecharacter == nome_character){
             let divCom = document.createElement('div');
+            divCom.classList.add('border', 'border-dark', 'p-3', 'bg-secondary', 'mt-3');
+
+
 
             let divBody = `
                             <div id="header-div">
-                                <h1>${comentario.nome}</h1>
+                                <h5>${comentario.nome}</h5>
                             </div>
                             <div id="body-div">
                                 <p>${comentario.desc}</p>

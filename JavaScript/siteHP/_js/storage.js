@@ -11,9 +11,13 @@ const setJSONItem = (key, value) =>{
 
 const getItem = (key) =>{
     return localStorage.getItem(key);
-}
+};
 
 const getJSONItem = (key) =>{
     let objeto = getItem(key);
     return JSON.parse(objeto);
-}
+};
+
+const removeItem = (key) =>{
+    localStorage.removeItem(key);
+};
