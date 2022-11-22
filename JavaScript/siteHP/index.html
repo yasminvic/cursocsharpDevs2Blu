@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harry Potter</title>
+    <link rel="stylesheet" href="style.css">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+      crossorigin="anonymous"
+    />
+</head>
+<body id="body">
+    <header>
+        <nav class="navbar navbar-expand-lg">
+            <div class="container-fluid">
+                <a id="logo-txt" class="navbar-brand text-white" href="index.html">
+                    <img src="_img/logo-txt.png" alt="Logo" width="50" height="44" class="d-inline-block align-text-top">
+                    Harry Potter
+                  </a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                    <a class="nav-link active text-white" id="btn-home" aria-current="page" href="index.html">Home</a>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Personagens
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" id="btn-all" href="#">Todos os Personagens</a></li>
+                      <li><hr class="dropdown-divider"></li>
+                      <li><a class="dropdown-item" id="btn-aluno" href="#">Alunos de Hogwarts</a></li>
+                      <li><a class="dropdown-item" id="btn-func" href="#">Funcionários de Hogwarts</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+    </header>
+    <div id="destaque" class="wrapper mb-3">
+      <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="_img/banner1.jpg" class="d-block w-100" height="450" alt="Harry Potter">
+          </div>
+      </div>
+    </div>
+    <main id="main-content" class="text-white container mt-3"> 
+        <h1 class="title">Harry Potter</h1>
+      <div id="texto-sobre" class="w-75 border-end px-3 mt-5 border-secondary">
+        <p class="">
+            Harry Potter é uma série de sete romances de fantasia escrita pela autora britânica J. K. Rowling. A série narra as aventuras de um jovem chamado Harry James Potter, que descobre aos 11 anos de idade que é um bruxo ao ser convidado para estudar na Escola de Magia e Bruxaria de Hogwarts. O arco de história principal diz respeito às amizades de Harry com outros bruxos de sua idade, como Ron Weasley e Hermione Granger, e também com o diretor de Hogwarts Albus Dumbledore, considerado o maior dos magos, e seus conflitos com o bruxo das trevas Lord Voldemort, que pretende se tornar imortal, conquistar o mundo dos bruxos, subjugar as pessoas não-mágicas e destruir todos aqueles que estão em seu caminho, especialmente Harry Potter, a quem ele considera seu maior rival.
+        </p>
+        <p class="">
+            Desde o lançamento do primeiro romance, Harry Potter e a Pedra Filosofal, em 26 de junho de 1997, os livros ganharam uma imensa popularidade, aclamação da crítica e foram um sucesso comercial em todo o mundo. A série também recebeu algumas críticas, incluindo a preocupação com o tom cada vez mais sombrio conforme a história progredia. Até maio de 2015, já haviam sido vendidas 450 milhões de cópias em todo o mundo, tornando a série a best-seller da história, sendo traduzida para 73 idiomas. Os últimos quatro livros consecutivamente foram considerados os mais vendidos da história, sendo que o último livro vendeu cerca de 11 milhões de cópias nos Estados Unidos nas primeiras 24 horas após o seu lançamento.
+        </p>
+        <p class="">
+            A série abrange vários gêneros, como fantasia, vida escolar e passagem entre a infância e a juventude (com elementos de mistério, suspense, aventura e romance), sendo que a história tem muitos significados e referências culturais. De acordo com Rowling, o tema principal é a morte. Há também muitas outras temáticas na série, como preconceito e corrupção.
+        </p>
+      </div>
+        <hr class="justify-content-center">
+        <h3>oi</h3>
+        <hr>
+
+        <aside id="favorite-characters">
+          <h2>Lista de Personagens Favoritos</h2>
+        </aside>
+
+        
+    </main>
+    <footer class="text-white border-top">
+        <div
+  class="d-flex flex-row align-items-center justify-between text-center px-5 custom-footer"
+>
+  <div class="my-3 d-flex flex-row align-items-center">
+    <h2 id="title-footer" class="ms-4 mb-0">Harry Potter</h2>
+  </div>
+  <div class="text-center flex-fill">
+    <p class="m-0">
+      Site projeto de Yasmin - Todos os
+      direitos reservados &copy;
+    </p>
+  </div>
+</div>
+    </footer>
+
+    <!--Modal-->
+    <div class="modal fade" id="charModal"  tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title fs-5">Personagem</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div id="modal-body" class="modal-body">
+
+            <!-- 
+              <div.card>
+                <div class="card-header">
+                  <h1>nome</h1>
+                  <img>
+              <div class="card-body">
+              <ol class="list-group list-group-numbered">
+              <li class="list-group-item d-flex justify-content-between align-items-start">
+                <div class="ms-2 me-auto">
+                  <div class="fw-bold">Subheading</div>
+                  Content for list item
+                </div>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-start">
+                <div class="ms-2 me-auto">
+                  <div class="fw-bold">Subheading</div>
+                  Content for list item
+                </div>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-start">
+                <div class="ms-2 me-auto">
+                  <div class="fw-bold">Subheading</div>
+                  Content for list item
+                </div>
+              </li>
+            </ol> 
+          </div>
+          </div>-->
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div id="scripts">
+        <!-- JQuery -->
+        <script
+          src="https://code.jquery.com/jquery-3.6.1.min.js"
+          integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+          crossorigin="anonymous"
+        ></script>
+        <!-- Bootstrap -->
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+          crossorigin="anonymous"
+        ></script>
+        <script src="_js/comentario.js"></script>
+        <script src="_js/storage.js"></script>
+        <script src="_js/library.js"></script>
+        <script src="./main.js"></script>
+</body>
+</html>
+
+
+<!-- <div class="card mb-3" style="max-width: 540px;">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img src="${character.image}" class="img-fluid rounded-start" alt="${character.name}">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">${character.name}</h5>
+        <ol class="list-group list-group-numbered">
+          <li class="list-group-item d-flex justify-content-between align-items-start">
+            <div class="ms-2 me-auto">
+              <div class="fw-bold">Species</div>
+              ${character.species}
+            </div>
+            <span class="badge bg-primary rounded-pill">14</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-start">
+            <div class="ms-2 me-auto">
+              <div class="fw-bold">House</div>
+              ${character.house}
+            </div>
+            <span class="badge bg-primary rounded-pill">14</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-start">
+            <div class="ms-2 me-auto">
+              <div class="fw-bold">Date of Birth</div>
+              ${character.dateOfBirth}
+            </div>
+            <span class="badge bg-primary rounded-pill">14</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-start">
+            <div class="ms-2 me-auto">
+              <div class="fw-bold">Gender</div>
+              ${character.gender}
+            </div>
+            <span class="badge bg-primary rounded-pill">14</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-start">
+            <div class="ms-2 me-auto">
+              <div class="fw-bold">Ancestry</div>
+              ${character.ancestry}
+            </div>
+            <span class="badge bg-primary rounded-pill">14</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-start">
+            <div class="ms-2 me-auto">
+              <div class="fw-bold">Patronus</div>
+              ${character.patronus}
+            </div>
+            <span class="badge bg-primary rounded-pill">14</span>
+          </li>
+        </ol>S
+      </div>
+    </div>
+  </div>
+</div>  -->
+
+
+
+<!-- <div id="header-div">
+  <h1>nome</h1>
+</div>
+<div id="body-div">
+  <p>comentario</p>
+</div> -->
