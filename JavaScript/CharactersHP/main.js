@@ -76,7 +76,7 @@ const listaCharacters = (title) =>{
 
         //casa nula
         if (casa === ""){
-            casa = 'Sem casa';
+            casa = 'No house';
             cor = 'light';
         }
 
