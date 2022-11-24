@@ -4,7 +4,8 @@ using System.Diagnostics;
 
 namespace Devs2Blu.ProjetosAula.PrimeiroProjetoMVC.Controllers
 {
-    [Route("")] //rota
+    //[Route("")] //rota
+    //[Route("home")]
     //quando carregar e estiver em branco, vai carregar a home
     public class HomeController : Controller
     {
@@ -21,6 +22,13 @@ namespace Devs2Blu.ProjetosAula.PrimeiroProjetoMVC.Controllers
         }
 
         public IActionResult Privacy()
+        {
+            return View();
+        }
+
+        [Route("home/cadastro")]
+        [Route("cadastre-se")]
+        public IActionResult Cadastro()
         {
             return View();
         }
