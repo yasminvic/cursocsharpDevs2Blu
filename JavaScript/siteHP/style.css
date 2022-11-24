@@ -116,6 +116,10 @@ p{
 }
 
 /*newsletter*/
+#newsletter-title{
+    font-family: 'Prompt';
+    text-align: center;
+}
 #newsletter-form{
     float: right;
     position: relative;
