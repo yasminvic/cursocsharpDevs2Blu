@@ -4,8 +4,6 @@ using System.Diagnostics;
 
 namespace Devs2Blu.ProjetosAula.PrimeiroProjetoMVC.Controllers
 {
-    [Route("")] //rota
-    //quando carregar e estiver em branco, vai carregar a home
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -17,10 +15,18 @@ namespace Devs2Blu.ProjetosAula.PrimeiroProjetoMVC.Controllers
 
         public IActionResult Index()
         {
-            return View("Teste"); //chamando o arq teste.cshtml
+            return View("Teste");
         }
 
         public IActionResult Privacy()
+        {
+            return View();
+        }
+
+        [Route("home/cadastro")]
+        [Route("cadastro")]
+        [Route("cadastre-se")]
+        public IActionResult Cadastro()
         {
             return View();
         }
