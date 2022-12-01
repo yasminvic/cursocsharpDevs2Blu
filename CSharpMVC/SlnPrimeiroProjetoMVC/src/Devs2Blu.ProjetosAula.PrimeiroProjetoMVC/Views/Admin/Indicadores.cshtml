@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewData["Title"] = "Indicadores";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div id="conteudo-cards" class="container my-4 mb-2"></div>
+
+@section Scripts{
+    <!--adicionando esse script lá na pag layout-->
+    <script>
+        $(document).ready(()=>{
+            $.ajax({
+                //cria uma url, 1 parametro: view, 2 parametro controller
+                    url: '@Url.Action("CardsResultados", "Admin")', //pega url
+                dataType: 'html', //devolve html
+                success:(response) =>{ //pega esse retorno e passa pra uma arrow function
+                    $('#conteudo-cards').html(response); //carrega esse retorno dentro da div
+                }
+            });
+        });
+    </script>
+}
+
+
