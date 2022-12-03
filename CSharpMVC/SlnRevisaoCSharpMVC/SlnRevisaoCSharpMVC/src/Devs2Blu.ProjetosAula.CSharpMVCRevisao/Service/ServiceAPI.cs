@@ -16,7 +16,7 @@ namespace Devs2Blu.ProjetosAula.CSharpMVCRevisao.Service
         {
             //dentro de GetListDataCardsDTO tem o atributo Data
             //essa var recebe a função Get, onde estamos passando o tipo do T e a URL como parametro
-            var objJSONResponse = await Get<GetListDataCardsDTO>(URL_API);
+            var objJSONResponse = await Get<GetListDataCardsDTO>(URL_API_PT);
 
             //recebe a lista Data dentro de GetListDataCardsDTO
             var listCards = objJSONResponse.Data;
@@ -25,13 +25,17 @@ namespace Devs2Blu.ProjetosAula.CSharpMVCRevisao.Service
             return listCards;
         }
 
-        public async Task<CardDTO> GetCardByName(string name)
+        //vai trazer um card pesquisando pelo nome
+        public async Task<List<CardDTO>> GetCardByName(string name)
         {
             //era pra ser urlSearch
             //utilzando aquela url base e criando outra
-            var urlSerach = $"{URL_API}?name={name}";
+            var urlSearch = $"{URL_API}?name={name}";
 
-            return await Get<CardDTO>(urlSerach);
+            //oq vem dps do ? é um paremetro, e dentro das chaves é um valor
+            var objJSONResponse = await Get<GetListDataCardsDTO>(urlSearch);
+            var listCards = objJSONResponse.Data;
+            return listCards;
         }
 
         #region BaseMethods
@@ -76,6 +80,7 @@ namespace Devs2Blu.ProjetosAula.CSharpMVCRevisao.Service
 
         #region CONST
         private const string URL_API = "https://db.ygoprodeck.com/api/v7/cardinfo.php";
+        private const string URL_API_PT = "https://db.ygoprodeck.com/api/v7/cardinfo.php?language=pt";
         #endregion
     }
 

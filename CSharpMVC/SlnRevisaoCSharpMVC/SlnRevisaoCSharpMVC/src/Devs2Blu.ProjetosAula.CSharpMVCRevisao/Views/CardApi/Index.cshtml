@@ -9,13 +9,8 @@
 @section Scripts{
         <script>
             $(document).ready(()=>{
-                $.ajax({
-                    url: '@Url.Action("LoadListCards")',
-                    dataType: 'html',
-                    success: (htmlPartialView) =>{
-                        $('#content-list').html(htmlPartialView);
-                    }
-                });
+                getView('cards', 'loadcards', '#content-list')
+                //inves de colocar um novo ajax, chamamos esse
             });
         </script>
 }

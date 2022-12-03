@@ -1,5 +1,5 @@
 ﻿@model List<Devs2Blu.ProjetosAula.CSharpMVCRevisao.Models.DTOAPI.CardDTO>
-
+<!--tinha que mudar alguma coisa aqui-->
 @foreach(var item in Model)
 {
         <div class="card mx-auto my-auto" style="width: 15rem;">
@@ -9,7 +9,7 @@
         <div class="card-body">
             <ul class="list-group">
                 <li class="list-group d-flex justify-content-between">
-                    <span class="badge bg-black text-white">@item.Id</span>
+                    <span class="badge bg-black text-white col-4">@item.Id</span>
                     <span>@item.Name</span>
                 </li>
             </ul>
