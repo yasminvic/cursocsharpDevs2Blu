@@ -1,4 +1,5 @@
 ﻿using Devs2Blu.CopaMundo.Models;
+using Devs2Blu.ProjetosAula.PrimeiroProjetoMVC.Models.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -7,26 +8,27 @@ namespace Devs2Blu.CopaMundo.Controllers
     public class ConsultaApiController : Controller
     {
         private readonly ILogger<ConsultaApiController> _logger;
+        private readonly CopaAPIService service;
 
         public ConsultaApiController(ILogger<ConsultaApiController> logger)
         {
             _logger = logger;
+            service = new CopaAPIService();
         }
 
+        [Route("index")]
         public IActionResult Index()
         {
             return View();
         }
 
-        public IActionResult Privacy()
+        [Route("matches")]
+        public async Task<PartialViewResult> Matches()
         {
-            return View();
+            var results = await service.GetMatches();
+            return PartialView(results);
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+       
     }
 }
