@@ -22,6 +22,12 @@ namespace Devs2Blu.CopaMundo.Controllers
             return View();
         }
 
+        [Route("indexgroups")]
+        public IActionResult IndexGroups()
+        {
+            return View();
+        }
+
         [Route("matches")]
         public async Task<PartialViewResult> Matches()
         {
@@ -29,6 +35,12 @@ namespace Devs2Blu.CopaMundo.Controllers
             return PartialView(results);
         }
 
+        [Route("groups")]
+        public async Task<PartialViewResult> Groups()
+        {
+            var results = await service.GetGroups();
+            return PartialView(results);
+        }
        
     }
 }

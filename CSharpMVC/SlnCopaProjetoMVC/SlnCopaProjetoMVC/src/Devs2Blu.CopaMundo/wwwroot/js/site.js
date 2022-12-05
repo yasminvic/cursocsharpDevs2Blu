@@ -1,4 +1,9 @@
-﻿const getView = (viewname, target) => {
+﻿$(document).ready(() => {
+    
+})
+
+
+const getView = (viewname, target) => {
     let url = `/${viewname}`;
     let ajaxConfig = {
         url: url,
@@ -10,4 +15,6 @@
 
     $.ajax(ajaxConfig);
 }
+
+
 
