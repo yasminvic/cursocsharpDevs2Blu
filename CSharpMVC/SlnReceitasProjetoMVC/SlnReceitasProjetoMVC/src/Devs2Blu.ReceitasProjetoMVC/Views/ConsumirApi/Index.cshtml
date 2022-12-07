@@ -1,0 +1,15 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="row" id="content-list">
+    
+</div>
+
+@section Scripts{
+    <script>
+        $(document).ready(() =>{
+            getView('recipes', '#content-list');
+        })
+   </script>
+}

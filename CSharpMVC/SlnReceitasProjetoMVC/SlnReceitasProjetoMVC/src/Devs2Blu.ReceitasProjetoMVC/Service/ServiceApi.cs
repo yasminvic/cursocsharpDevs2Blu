@@ -1,0 +1,78 @@
+﻿using Devs2Blu.ReceitasProjetoMVC.Models.Receita;
+
+namespace Devs2Blu.ReceitasProjetoMVC.Service
+{
+    public class ServiceApi
+    {
+        private readonly HttpClient _httpClient;
+
+        public ServiceApi()
+        {
+            _httpClient = new HttpClient();
+        }
+
+        public async Task<List<Recipe>> GetRecipes()
+        {
+            var objResponse = await Get<GetListReceitas>(URL_API);
+            var listRecipes = objResponse.Results;
+            return listRecipes;
+        }
+
+        public async Task<List<Recipe>> GetRecipeByName(string name)
+        {
+            string url = URL_API + $"0&name={name}";
+            var objResponse = await Get<GetListReceitas>(url);  
+            var listRecipes = objResponse.Results;
+            return listRecipes;
+        }
+
+        #region base methods
+
+        public async Task<T> Get<T>(string url)
+        {
+            var response = await GetAsync(url);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                return (T)(object)url;
+            }
+
+            return await response.Content.ReadFromJsonAsync<T>();
+        }
+
+        public async Task<List<T>> GetList<T>(string url)
+        {
+            var response = await GetAsync(url);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                return new List<T>();
+            }
+
+            return await response.Content.ReadFromJsonAsync<List<T>>();
+        }
+
+        //comunicação com a API
+        public async Task<HttpResponseMessage> GetAsync(string url)
+        {
+            var getRequest = new HttpRequestMessage()
+            {
+                Method = HttpMethod.Get,
+                RequestUri = new Uri(url),
+                Headers =
+                {
+                    {"X-RapidAPI-Key", "7aff568922msh4fc94b4b3a7d874p1fdcaejsn15a689ba2dc3" },
+                    {"X-RapidAPI-Host", "tasty.p.rapidapi.com" }
+                }
+            };
+
+            return await _httpClient.SendAsync(getRequest);
+        }
+
+        #endregion
+
+        #region URL_API
+        private const string URL_API = "https://tasty.p.rapidapi.com/recipes/list?from=0&size=20&tags=under_30_minutes";
+        #endregion
+    }
+}

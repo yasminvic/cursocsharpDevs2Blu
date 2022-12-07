@@ -1,0 +1,23 @@
+﻿@using Devs2Blu.ReceitasProjetoMVC.Models.Receita
+@model List<Recipe>
+
+<div class="row" id="content-list">
+@foreach (var receita in Model)
+{
+         <div class="card mx-auto mb-3" style="width: 15rem;">
+                    <div class="card-header bg-dark text-white">
+                        <h3 class="text-center">@receita.Name</h3>
+
+                </div>
+                <div class="card-body ">
+                    <ul class="list-group text-center">
+                        <li class="list-group d-flex justify-content-between">
+                            <img src="@receita.Thumbnail_Url">
+                        </li>
+                    </ul>
+                </div>
+            </div>
+}
+</div>
+
+
