@@ -1,5 +1,5 @@
-﻿const getView = (nameview, target) => {
-    let url = `/${nameview}`;
+﻿const getView = (controller, nameview, target) => {
+    let url = `/${controller}/${nameview}`;
     let ajaxConfig = {
         url: url,
         dataType: 'html',
@@ -14,16 +14,33 @@
 $(document).ready((e) => {
     $('#btn-search').click((e) => {
         e.preventDefault();
+        console.log(e)
         let receita = $('#input-search').val();
-        let url = `/search/${receita}`;
-        let ajaxConfig = {
-            url: url,
+        $.ajax({
+            url: `/receitas/search/${receita}`,
             dataType: 'html',
             success: (response) => {
-                $('#conten-list').html(response);
+                $('#content-list').html(response)
             }
-        };
-
-        $.ajax(ajaxConfig);
+        });
     })
+
+
+
 })
+
+
+
+const criaDescr = (id) => {
+    console.log('oi');
+    let idreceita = id;
+    $.ajax({
+        url: `/receitas/description/${idreceita}`,
+        dataType: 'html',
+        success: (response) => {
+            $('content-list').html(response);
+            console.log('oi');
+        }
+    });
+    console.log('oi');
+}

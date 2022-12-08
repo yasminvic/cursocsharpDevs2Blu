@@ -1,21 +1,71 @@
 ﻿@using Devs2Blu.ReceitasProjetoMVC.Models.Receita
 @model List<Recipe>
 
-@foreach (var receita in Model)
-{
-         <div class="card mx-auto mb-3" style="width: 15rem;">
-                    <div class="card-header bg-dark text-white">
-                        <h3 class="text-center">@receita.Name</h3>
+@*<div class="modal-dialog d-none" id="receitaModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div id="modal-body" class="modal-body">
+
+
 
                 </div>
-                <div class="card-body ">
-                    <ul class="list-group text-center">
-                        <li class="list-group d-flex justify-content-between">
-                            <img src="@receita.Thumbnail_Url">
-                        </li>
-                    </ul>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
                 </div>
             </div>
+</div>*@
+
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div id="modal-body" class="modal-body">
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+@foreach (var receita in Model)
+{
+        
+
+    <div class="card text-white bg-success mb-3 mx-auto col-4 m-3" style="max-width: 18rem;">
+      <div class="w-100">
+              <img src="@receita.Thumbnail_Url" width="150" height="300" class="card-image card-img-top mt-2 mb-1 img-custom">
+      </div>
+          <div class="card-body">
+                <h5 class="text-dark text-center mt-3">@receita.Name</h5>
+                <h5 id="id-receita" class="text-dark text-center mt-3 d-none">@receita.Id</h5>
+                <a href="#" id="btn-receita"  class="btn btn-default btnDetails" data-value="@receita.Name">Details</a>
+      </div>
+    </div>
 }
+
+@section Scripts{
+    <script>
+        $(document).ready(()=>{
+            $('#btn-receita').click(()=>{
+                criaDescr('#id-receita');
+            })
+        })
+    </script>
+}
+
 
 

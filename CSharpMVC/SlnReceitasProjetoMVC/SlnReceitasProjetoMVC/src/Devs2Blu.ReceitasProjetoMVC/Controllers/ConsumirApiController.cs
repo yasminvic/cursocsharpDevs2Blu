@@ -5,6 +5,7 @@ using System.Diagnostics;
 
 namespace Devs2Blu.ReceitasProjetoMVC.Controllers
 {
+    [Route("receitas")]
     public class ConsumirApiController : Controller
     {
         private readonly ILogger<ConsumirApiController> _logger;
@@ -16,13 +17,14 @@ namespace Devs2Blu.ReceitasProjetoMVC.Controllers
             service = new ServiceApi();
         }
 
+        [Route("")]
         [Route("index")]
         public IActionResult Index()
         {
             return View();
         }
 
-        [Route("recipes")]
+        [Route("listrecipes")]
         public async Task<PartialViewResult> Recipe()
         {
             var result = await service.GetRecipes();
@@ -33,6 +35,13 @@ namespace Devs2Blu.ReceitasProjetoMVC.Controllers
         public async Task<PartialViewResult> Search(string receita)
         {
             var result = await service.GetRecipeByName(receita);
+            return PartialView(result);
+        }
+
+        [Route("description/{id}")]
+        public async Task<PartialViewResult> Description(int id)
+        {
+            var result = await service.GetRecipeById(id);
             return PartialView(result);
         }
     }

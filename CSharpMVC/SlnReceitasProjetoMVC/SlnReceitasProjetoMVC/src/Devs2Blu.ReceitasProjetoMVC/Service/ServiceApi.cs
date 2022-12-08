@@ -1,4 +1,5 @@
 ﻿using Devs2Blu.ReceitasProjetoMVC.Models.Receita;
+using System.Xml.Linq;
 
 namespace Devs2Blu.ReceitasProjetoMVC.Service
 {
@@ -13,17 +14,26 @@ namespace Devs2Blu.ReceitasProjetoMVC.Service
 
         public async Task<List<Recipe>> GetRecipes()
         {
-            var objResponse = await Get<GetListReceitas>(URL_API);
+            var objResponse = await Get<GetListReceitas>(URL_TAGS);
             var listRecipes = objResponse.Results;
             return listRecipes;
         }
 
         public async Task<List<Recipe>> GetRecipeByName(string name)
         {
-            string url = URL_API + $"0&name={name}";
+            string url = $"{URL_TAGS}&q={name}";
             var objResponse = await Get<GetListReceitas>(url);  
             var listRecipes = objResponse.Results;
             return listRecipes;
+        }
+
+        //quando clica em descrição
+        public async Task<Recipe> GetRecipeById(int id)
+        {
+            string url = $"{URL_DESCR}{id}";
+            var objResponse = await Get<Recipe>(url);
+            var listRecipes = objResponse;
+            return objResponse;
         }
 
         #region base methods
@@ -72,7 +82,9 @@ namespace Devs2Blu.ReceitasProjetoMVC.Service
         #endregion
 
         #region URL_API
-        private const string URL_API = "https://tasty.p.rapidapi.com/recipes/list?from=0&size=20&tags=under_30_minutes";
+        private const string URL_API = "https://tasty.p.rapidapi.com";
+        private const string URL_TAGS = $"{URL_API}/recipes/list?from=0&size=20&tags=under_30_minutes";
+        private const string URL_DESCR = $"{URL_API}/recipes/get-more-info?id=";
         #endregion
     }
 }
