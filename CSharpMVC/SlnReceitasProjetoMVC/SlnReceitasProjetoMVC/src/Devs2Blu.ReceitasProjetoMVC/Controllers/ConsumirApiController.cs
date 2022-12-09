@@ -44,5 +44,7 @@ namespace Devs2Blu.ReceitasProjetoMVC.Controllers
             var result = await service.GetRecipeById(id);
             return PartialView(result);
         }
+
+        
     }
 }

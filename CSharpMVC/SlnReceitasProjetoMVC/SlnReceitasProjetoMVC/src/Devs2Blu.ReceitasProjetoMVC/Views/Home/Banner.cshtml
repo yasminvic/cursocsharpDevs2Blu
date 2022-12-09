@@ -1,0 +1,15 @@
+﻿@using Devs2Blu.ReceitasProjetoMVC.Models.Receita
+@model List<Recipe>
+
+
+@foreach (var item in Model)
+{
+    <div class="card mx-auto bg-success destaque-receitas" style="max-width: 18rem;">
+    <div class="cardh-header text-white">
+        <h4>Em destaque</h4>
+    </div>
+    <div class="card-body"> 
+        <img src="@item.Thumbnail_Url" width="200" height="150" class="card-image card-img-top mt-2 mb-1 img-custom w-100 w-100">
+    </div>
+        </div>
+}

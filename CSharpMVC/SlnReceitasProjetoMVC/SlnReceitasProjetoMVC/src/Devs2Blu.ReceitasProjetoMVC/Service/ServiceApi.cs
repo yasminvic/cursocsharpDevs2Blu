@@ -36,6 +36,21 @@ namespace Devs2Blu.ReceitasProjetoMVC.Service
             return objResponse;
         }
 
+        public async Task<List<Recipe>> GetRandomRecipe()
+        {
+            Random random = new Random();
+            int n1 = random.Next(1,10);
+            int n2 = random.Next(10, 20);;
+
+            string url = $"{URL_API}/recipes/list?from={n1}&size={n2}&tags=under_30_minutes";
+
+            var objResponse = await Get<GetListReceitas>(url);
+            var listReceitas = objResponse.Results;
+            return listReceitas;
+
+
+        }
+
         #region base methods
 
         public async Task<T> Get<T>(string url)

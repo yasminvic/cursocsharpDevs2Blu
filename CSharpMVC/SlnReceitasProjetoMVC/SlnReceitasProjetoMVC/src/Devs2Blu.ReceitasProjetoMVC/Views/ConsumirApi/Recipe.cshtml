@@ -45,14 +45,14 @@
 {
         
 
-    <div class="card text-white bg-success mb-3 mx-auto col-4 m-3" style="max-width: 18rem;">
+    <div class="card bg-success mb-3 mx-auto col-4 m-3 text-center d-flex justify-content-between" style="max-width: 18rem;">
       <div class="w-100">
               <img src="@receita.Thumbnail_Url" width="150" height="300" class="card-image card-img-top mt-2 mb-1 img-custom">
       </div>
           <div class="card-body">
-                <h5 class="text-dark text-center mt-3">@receita.Name</h5>
+                <h5 class="text-dark text-center mt-3 card-title text-bottom">@receita.Name</h5>
                 <h5 id="id-receita" class="text-dark text-center mt-3 d-none">@receita.Id</h5>
-                <a href="#" id="btn-receita"  class="btn btn-default btnDetails" data-value="@receita.Name">Details</a>
+                        <a href="#" class="btn btn-default btnDetails text-center text-white mx-auto card-link mt-3 p-2 btn-receita" data-value="@receita.Name">Details</a>
       </div>
     </div>
 }
@@ -60,7 +60,7 @@
 @section Scripts{
     <script>
         $(document).ready(()=>{
-            $('#btn-receita').click(()=>{
+            $('.btn-receita').click(()=>{
                 criaDescr('#id-receita');
             })
         })
