@@ -23,6 +23,8 @@ namespace Devs2Blu.ProjetosAula.MVCSQLServerApp2.Web.Models.Entities
         public int Quantidade { get; set; }
 
         //mapeia de outro jeito pq é um relacionamento
+        [Column("id_categoria")]
+        [Display(Name = "Categoria")]
         public Categoria Categoria { get; set; }
     }
 }
