@@ -3,35 +3,52 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Devs2Blu.ProjetosAula.MVCSQLServerApp2.Web.Models
 {
-    //cria um ambiente de banco de dados pra fazer transições
-    //esse aqui é pra SQLServer, mas poderia ter pra mysql
-    public class ContextoDatabase : DbContext //herda desse cara
+    public class ContextoDatabase : DbContext
     {
         public ContextoDatabase(DbContextOptions<ContextoDatabase> options)
-            : base(options) //isso é um super.__init__ //ta inicializando options de DbContext
+            : base(options)
         {
-             
+
         }
 
-        //sob-escrevemos esse metodo
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //Mapeamento de relacionamento
+            // Mapeamento de Relacionamento
+            modelBuilder.Entity<Produto>()
+                .HasOne(p => p.Categoria)
+                .WithMany(c => c.Produtos)
+                .HasForeignKey(p => p.CategoriaId);
 
-            //construtor da model, vai pegar essa confg todas das tabelas e criar pra gente
-            modelBuilder.Entity<Produto>()//entidade que vamos buildar
-                .HasOne(p => p.Categoria) //ta dizendo que existe um relacionamento entre categoria e produto
-                .WithMany(c => c.Produtos);
 
-            //ta dizendo que tem uma categoria dentro de produtos, com vários produtos dentro de categoria
+
+            // Seed
+            modelBuilder.Entity<Categoria>()
+                .HasData(
+                new { Id = 1, Nome = "Alimentos Não Perecíveis"},
+                new { Id = 2, Nome = "Laticínios"},
+                new { Id = 3, Nome = "Limpeza"},
+                new { Id = 4, Nome = "Bebidas Não Alcoólicas"}
+                );
+
+            modelBuilder.Entity<Produto>()
+                .HasData(
+                new { Id = 1, Nome = "Arroz Tio Urbano", Preco = 10.00, Quantidade = 5, CategoriaId = 1 },
+                new { Id = 2, Nome = "Feijão Tio Urbano", Preco = 10.00, Quantidade = 5, CategoriaId = 1 },
+                new { Id = 3, Nome = "Queijo", Preco = 20.00, Quantidade = 5, CategoriaId = 2 },
+                new { Id = 4, Nome = "Iogurte", Preco = 20.00, Quantidade = 5, CategoriaId = 2 },
+                new { Id = 5, Nome = "Sabão Líquido", Preco = 30.00, Quantidade = 5, CategoriaId = 3 },
+                new { Id = 6, Nome = "Multiuso", Preco = 30.00, Quantidade = 5, CategoriaId = 3 },
+                new { Id = 7, Nome = "Suco de Laranja 1L", Preco = 40.00, Quantidade = 5, CategoriaId = 4 },
+                new { Id = 8, Nome = "Coca-cola 2L", Preco = 40.00, Quantidade = 5, CategoriaId = 4 }
+                );
 
             base.OnModelCreating(modelBuilder);
         }
 
         #region DbSets
-        //colocamos todas nossas tabelas aqui
         public DbSet<Categoria> Categoria { get; set; }
         public DbSet<Produto> Produto { get; set; }
+
         #endregion
     }
 }

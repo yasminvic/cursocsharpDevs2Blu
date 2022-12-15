@@ -7,24 +7,27 @@ namespace Devs2Blu.ProjetosAula.MVCSQLServerApp2.Web.Models.Entities
     public class Produto
     {
         [Column("id")]
-        [Display(Name = "Id")]
+        [Display(Name = "Código")]
         public int Id { get; set; }
 
         [Column("nome")]
-        [Display(Name = "Name")]
+        [Display(Name = "Nome")]
         public string Nome { get; set; }
 
         [Column("preco")]
         [Display(Name = "Preço")]
-        public Decimal Preco { get; set; }
+        public Double Preco { get; set; }
 
         [Column("quantidade")]
         [Display(Name = "Quantidade")]
         public int Quantidade { get; set; }
 
-        //mapeia de outro jeito pq é um relacionamento
-        [Column("id_categoria")]
+        [Column("CategoriaId")]
         [Display(Name = "Categoria")]
-        public Categoria Categoria { get; set; }
+        public int CategoriaId { get; set; }
+
+        public virtual Categoria? Categoria { get; set; }
+
+        //esse ponto de interrogação significa que esse dado pode ser nulo ou não
     }
 }
