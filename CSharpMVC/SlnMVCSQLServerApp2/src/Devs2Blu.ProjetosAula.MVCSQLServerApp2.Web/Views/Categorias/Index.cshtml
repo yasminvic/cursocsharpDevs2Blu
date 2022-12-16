@@ -1,14 +1,31 @@
 ﻿@model IEnumerable<Devs2Blu.ProjetosAula.MVCSQLServerApp2.Web.Models.Entities.Categoria>
 
-@{
-    ViewData["Title"] = "Index";
-}
+<div class="alert alert-success" id="alertMsg" style="display: none;">
+    <h2></h2>
+</div>
 
 <h1>Index</h1>
 
 <p>
     <a class="btn btn-primary" asp-action="Create">Nova Categoria</a>
 </p>
+
+<!--Modal do botao delete-->
+<div id="msgCat" style="display: none;" class="container mb-4">
+    <div class="card bg-warning" style="width: 12rem;">
+        <div class="card-header">
+            <h3 class="text-danger" id="msgHeader">Excluir</h3>
+        </div>
+        <div class="card-body">
+            <h3 class="text-danger">Deseja Realmente excluir o registro: <span id="msgBody"></span></h3>
+            <br>
+            <button class="btn btn-danger" id="btnExcluir">Excluir</button>
+            <button class="btn btn-primary" id="btnCancelar">Cancelar</button>
+        </div>
+    </div>
+</div>
+
+<!--tabela com todas as categorias-->
 <table class="table">
     <thead>
         <tr>
@@ -32,9 +49,63 @@
             </td>
             <td>
                 <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    <a class="btn btn-danger" href="#" onclick="deleteCategoria(@item.Id, '@item.Nome')">Delete</a>
             </td>
         </tr>
 }
     </tbody>
 </table>
+
+@section Scripts{
+    <script>
+        $(document).ready(()=>{
+            //Do Edit Model
+            
+            //esconder modal se clicar no cancelar
+            $('#btnCancelar').click(() =>{
+                $("msgCat").hide();
+
+                //limpando o card-body
+                $('#msgBody').html("");
+
+                //removendo evento, desabilitando o botao
+                $('#btnExcluir').unbind();
+            });
+        });
+
+        //modal do excluir
+        const deleteCategoria = (id, nome) =>{
+            //mudando a mensangem do modal com as informações de cada integrante
+            $('#msgBody').html(`${id} - ${nome}`);
+
+            //se clicar no botao excluir, vai executar esse metodo
+            $('#btnExcluir').click(() => executeDeleteCategoria(id));
+
+            //modal que pergunta se realmente quer deletar
+            $('#msgCat').show();
+        };
+
+        const executeDeleteCategoria = (id) =>{
+            $('#msgCat').hide();
+
+            $.ajax({
+                url: `@Url.Action("Delete")/${id}`, 
+                method: 'GET',,
+                success: (response) =>{
+                    //'OK' vem do controller
+                    if(response === 'OK'){
+                        //mostra um alert
+                        $('#alertMsg').html('Registro Apagado com Sucesso!');
+                        $('#alertMsg').show();
+
+                        //faz com que o alert apague dps de 2s
+                        setTimeout(() => {
+                             $('#alertMsg').fadeOut();
+                             $('#alertMsg').html('');
+                        }, 2000);
+                    }
+                };
+            });
+        };
+    </script>
+}
