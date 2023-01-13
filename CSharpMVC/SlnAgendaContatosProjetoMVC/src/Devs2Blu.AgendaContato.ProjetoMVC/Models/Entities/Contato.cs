@@ -22,6 +22,6 @@ namespace Devs2Blu.AgendaContato.ProjetoMVC.Models.Entities
         [Display(Name = "Email")]
         public string Email { get; set; }
 
-        public ICollection<Compromisso>? Compromissos { get; set; }
+        public virtual ICollection<Compromisso>? Compromissos { get; set; }
     }
 }

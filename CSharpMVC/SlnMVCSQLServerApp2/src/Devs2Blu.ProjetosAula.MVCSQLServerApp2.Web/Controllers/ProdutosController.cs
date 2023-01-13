@@ -14,8 +14,6 @@ namespace Devs2Blu.ProjetosAula.MVCSQLServerApp2.Web.Controllers
     {
         private readonly ContextoDatabase _context;
 
-        //acessando o contexto direto no controller, por isso a gente fez aquela pasta service
-        //pra acessar o contexto atraves de camadas
         public ProdutosController(ContextoDatabase context)
         {
             _context = context;
@@ -25,7 +23,7 @@ namespace Devs2Blu.ProjetosAula.MVCSQLServerApp2.Web.Controllers
         public async Task<IActionResult> Index()
         {
             var contextoDatabase = _context.Produto.Include(p => p.Categoria);
-            return View(await contextoDatabase.ToListAsync());
+            return View(contextoDatabase.ToListAsync());
         }
 
         // GET: Produtos/Details/5
@@ -50,7 +48,7 @@ namespace Devs2Blu.ProjetosAula.MVCSQLServerApp2.Web.Controllers
         // GET: Produtos/Create
         public IActionResult Create()
         {
-            ViewData["CategoriaId"] = new SelectList(_context.Categoria, "Id", "Id");
+            ViewData["CategoriaId"] = new SelectList(_context.Categoria, "Id", "Nome", "Selecione...");
             return View();
         }
 
@@ -67,7 +65,7 @@ namespace Devs2Blu.ProjetosAula.MVCSQLServerApp2.Web.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CategoriaId"] = new SelectList(_context.Categoria, "Id", "Id", produto.CategoriaId);
+            ViewData["CategoriaId"] = new SelectList(_context.Categoria, "Id", "Nome", produto.CategoriaId);
             return View(produto);
         }
 
@@ -79,12 +77,12 @@ namespace Devs2Blu.ProjetosAula.MVCSQLServerApp2.Web.Controllers
                 return NotFound();
             }
 
-            var produto = await _context.Produto.FindAsync(id);
+            var produto = await _context.Produto.FindAsync(id); //chamar isso em camadas
             if (produto == null)
             {
                 return NotFound();
             }
-            ViewData["CategoriaId"] = new SelectList(_context.Categoria, "Id", "Id", produto.CategoriaId);
+            ViewData["CategoriaId"] = new SelectList(_context.Categoria, "Id", "Nome", produto.CategoriaId);
             return View(produto);
         }
 
@@ -104,12 +102,12 @@ namespace Devs2Blu.ProjetosAula.MVCSQLServerApp2.Web.Controllers
             {
                 try
                 {
-                    _context.Update(produto);
+                    _context.Update(produto);//chamar em camadas
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ProdutoExists(produto.Id))
+                    if (!ProdutoExists(produto.Id))//chamar isso em camadas
                     {
                         return NotFound();
                     }
@@ -120,7 +118,7 @@ namespace Devs2Blu.ProjetosAula.MVCSQLServerApp2.Web.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CategoriaId"] = new SelectList(_context.Categoria, "Id", "Id", produto.CategoriaId);
+            ViewData["CategoriaId"] = new SelectList(_context.Categoria, "Id", "Nome", produto.CategoriaId);
             return View(produto);
         }
 

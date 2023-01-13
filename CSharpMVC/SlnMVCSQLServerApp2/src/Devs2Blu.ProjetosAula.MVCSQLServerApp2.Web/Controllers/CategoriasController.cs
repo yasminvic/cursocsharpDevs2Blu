@@ -1,26 +1,21 @@
-﻿using Devs2Blu.ProjetosAula.MVCSQLServerApp2.Web.Models;
-using Devs2Blu.ProjetosAula.MVCSQLServerApp2.Web.Models.Entities;
-using Devs2Blu.ProjetosAula.MVCSQLServerApp2.Web.Service.Interfaces;
+﻿using Devs2Blu.ProjetosAula.MVCSQLServerApp2.Web.Models.Entities;
+using Devs2Blu.ProjetosAula.MVCSQLServerApp2.Web.Models.ViewModel;
+using Devs2Blu.ProjetosAula.MVCSQLServerApp2.Web.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 
 namespace Devs2Blu.ProjetosAula.MVCSQLServerApp2.Web.Controllers
 {
     public class CategoriasController : Controller
     {
         private readonly ICategoriasService _service;
-        public CategoriasController(ICategoriasService service, ContextoDatabase context)
+        public CategoriasController(ICategoriasService service)
         {
-            //contexto
             _service = service;
         }
-
         // GET: CategoriasController
-        public async  Task<ActionResult> Index()
+        public async Task<ActionResult> Index()
         {
-            //retornando uma lista de categorias do banco (contexto) na index quando carregar
             var listCategorias = await _service.GetAllCategorias();
             return View(listCategorias);
         }
@@ -34,27 +29,21 @@ namespace Devs2Blu.ProjetosAula.MVCSQLServerApp2.Web.Controllers
         // POST: CategoriasController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //recebe form do html
-        public async Task<IActionResult> Create([Bind("Id,Nome")] Categoria categoria)
+        public async Task<ActionResult> Create([Bind("Id,Nome")] CategoriaViewModel categoria)
         {
             try
             {
-                //verifica se tá válido
                 if (ModelState.IsValid)
                 {
-                    //vai pro service (é um metodo da interface que foi implementado na CategoriaService)
-                    await _service.Save(categoria); 
+                    await _service.Save(categoria.ToEntity());
                     return RedirectToAction(nameof(Index));
                 }
             }
             catch
             {
-
             }
-
-            return View(categoria);
+                return View(categoria);
         }
-
 
         // GET: CategoriasController/Edit/5
         public ActionResult Edit(int id)
@@ -78,23 +67,24 @@ namespace Devs2Blu.ProjetosAula.MVCSQLServerApp2.Web.Controllers
         }
 
         // GET: CategoriasController/Delete/5
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            return View();
+            var categoria = await _service.FindById(id);
+            return View(new CategoriaViewModel() { id = categoria.Id, nome = categoria.Nome });
         }
 
         // POST: CategoriasController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        [HttpPost, ActionName("Delete")]
+        public async Task<ActionResult<string>> ExecuteDelete([Bind("id,nome")] CategoriaViewModel categoria)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                var resp = await _service.Delete(categoria.ToEntity());
+                return new ActionResult<string>("OK");
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                return new ActionResult<string>(ex.Message);
             }
         }
     }

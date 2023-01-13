@@ -6,36 +6,33 @@ namespace Devs2Blu.ProjetosAula.MVCSQLServerApp2.Web.Repository
 {
     public class CategoriaRepository
     {
-        //injetar o contexto aqui
-
-        //objeto da classe contexto
         private readonly ContextoDatabase _context;
+
         public CategoriaRepository(ContextoDatabase context)
         {
             _context = context;
         }
 
-        //pega todos os registros, retorna do banco de dados
         public async Task<IEnumerable<Categoria>> GetAll()
         {
-            //retornar uma lista de categorias instaciandas na classe contexto
             return await _context.Categoria.ToListAsync();
         }
 
         public async Task<int> SaveCategoria(Categoria categoria)
         {
             _context.Add(categoria);
-            //retorna qualquer mudança no banco
             return await _context.SaveChangesAsync();
+        }
+
+        internal async Task<int> DeleteCategoria(Categoria categoria)
+        {
+            _context.Categoria.Remove(categoria);
+            return await _context.SaveChangesAsync();
+        }
+
+        internal async Task<Categoria> FindByIdCategoria(int id)
+        {
+            return await _context.Categoria.FindAsync(id);
         }
     }
 }
-
-
-//passo a passo:
-/*
- View solicita algo para Controller atraves de um form (nem sempre)
- Controller vai solicitar ao Service
- Service vai solicitar ao Repository
- Repository vai salvar no contexto (banco de dados)
- */
