@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
+using RevisaoProjetoNoticias.Domain.IRepositories;
 using RevisaoProjetoNoticias.Infra.Data.Context;
+using RevisaoProjetoNoticias.Infra.Data.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +10,11 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<SQLServerContext>
     (options => options.UseSqlServer("Server=LAPTOP-EBG33A6E\\SQLEXPRESS;Database=NewsPage;User Id=sa;Password=gibi2016;TrustServerCertificate=True;"));
+
+//Injenção de dependência
+// *Repositories
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<INewsRepository, NewsRepository>();
 
 var app = builder.Build();
 

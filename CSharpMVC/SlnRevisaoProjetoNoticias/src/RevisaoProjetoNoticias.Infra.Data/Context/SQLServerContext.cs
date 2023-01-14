@@ -27,7 +27,7 @@ namespace RevisaoProjetoNoticias.Infra.Data.Context
                 );
 
 
-            base.OnModelCreating(modelBuilder);
+           base.OnModelCreating(modelBuilder);
         }
 
         #region DbSets
