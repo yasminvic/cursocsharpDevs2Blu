@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
+using RevisaoProjetoNoticias.Application.Service.SQLServerServices;
 using RevisaoProjetoNoticias.Domain.IRepositories;
+using RevisaoProjetoNoticias.Domain.IServices;
 using RevisaoProjetoNoticias.Infra.Data.Context;
 using RevisaoProjetoNoticias.Infra.Data.Repositories;
 
@@ -15,6 +17,9 @@ builder.Services.AddDbContext<SQLServerContext>
 // *Repositories
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<INewsRepository, NewsRepository>();
+
+// *Services
+builder.Services.AddScoped<ICategoryService, CategoryService>();
 
 var app = builder.Build();
 
