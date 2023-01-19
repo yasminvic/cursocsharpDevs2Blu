@@ -1,0 +1,483 @@
+/* CSS Document */
+
+body, table, p {
+	margin:0px;
+	padding:0px;
+	font-size:10px;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	color:#333333;
+}
+
+
+p {	padding-bottom:10px;}
+
+a {
+	text-decoration: underline;
+	color:#000000;
+	font-size:10px;
+}
+
+a:hover {
+	text-decoration: underline;
+	color:#000000;
+	font-size:10px;
+}
+
+#conteudo-topo, #conteudo-topo2, #conteudo-miolo, #rodape-rh, #rodape, #conteudo-menu, #conteudo-gerencial {
+	margin:0px auto 0px auto;
+}
+
+#conteudo-topo, #conteudo-topo2 {
+	width:100%;
+	height:97px;
+	background-image:url(../img/fundo-menu-restrito.gif);
+	background-position:center;
+	background-repeat: no-repeat;
+}
+
+#conteudo-menu {
+	width:779px;
+	height:40px;
+	background-image:url(../img/fundo-menu-2.gif);
+	text-align:right;
+}
+
+.campo-home {
+	font-size:10px;
+	width:80px;
+	height:12px;
+}
+
+#links-menu {
+	padding-top:7px;
+	padding-right:150px;
+}
+
+#links-menu a, #conteudo-menu-interna a {
+	color:#000000;
+	font-size:11px;
+	text-decoration:none;
+}
+
+#links-menu a:hover, #conteudo-menu-interna a:hover {
+	text-decoration:underline;
+}
+
+#links-menu ul {
+	margin:0px;
+	padding:0px;
+}
+
+#links-menu li {
+	margin:0px;
+	display:inline;
+	padding-left:2px;
+	padding-right:2px;
+}
+
+#conteudo-miolo {
+	width:773px;
+	display:table;
+}
+
+#interna-esquerda {
+	width:200px;
+	text-align: left;
+	margin-top: 5px;
+	padding: 3px 3px 3px 3px;
+}
+
+#interna-direita {
+	width:558px;
+	text-align:left;
+	margin-top: 5px;
+	padding: 3px 3px 3px 3px;
+	min-height:251px;
+	_height:251px;
+	float:right;
+}
+
+#miolo-esquerdo {
+	width:439px;
+	float:left;
+	display:inline;
+}
+
+#miolo-direita {
+	width:331px;
+	height:251px;
+	float:right;
+	display:inline;
+	background-image:url(../img/fundo-destaques.jpg);
+	background-repeat:no-repeat;
+}
+
+#miolo-esquerdo-banner {
+	width:439px;
+	height:125px;
+	margin-bottom:3px;
+}
+
+#miolo-esquerdo-destaque {
+	width:439px;
+	height:123px;
+}
+
+#enquete {
+	width:218px;
+	height:123px;
+	background-image:url(../img/fundo-enquete.jpg);
+	background-repeat: no-repeat;
+	float:left;
+	display:inline;
+}
+
+#dicas {
+	width:218px;
+	height:123px;
+	background-image:url(../img/fundo-dicas.jpg);
+	background-repeat: no-repeat;	
+	float:right;
+	display:inline;
+}
+
+#conteudo-texto {
+	padding:10px;
+	text-align:left;
+}
+
+#rodape {
+	width:100%;
+	height:16px;
+	background-image:url(../img/fundo-rodape.gif);
+}
+
+#rodape-rh {
+	width:769px;
+	padding-right:10px;
+	text-align:right;
+}
+
+#conteudo-gerencial {
+	width:450;
+	height:320px;
+	position:absolute;
+	left:10px;
+	top:7px;
+	text-align:left;
+}
+
+#conteudo-topo-bar{
+	display:none;
+	width:100%;
+	height:40px;
+	text-align:left;
+	background-repeat:no-repeat;
+	background-image:url(../img/fundo-menu-2.gif);
+}
+
+#conteudo-topo-bar2{
+	display:none;
+/*	width:100%;
+	height:40px;
+	text-align:left;
+	background-image:url(../img/bgiTopoBarra.gif);*/
+}
+
+#menu-interna {
+	width:207px;
+	height:315px;
+/*	background-image:url(../img/fundo-menu-3.gif);*/
+}
+
+#conteudo-menu-interna {
+	padding:15px;
+	text-align:left;
+}
+
+#linha-menu-interna {
+	height:2px;
+	padding-top:7px;
+	padding-bottom:7px;
+}
+
+.campo-navegacao {
+	font-size:10px;
+	width:200px;
+	height:18px;
+}
+
+
+/* submenu do menu do topo */
+
+.submenu{
+	position:absolute;
+	visibility: hidden;
+	border:1px solid #FFFFFF ;
+	border-top-width: 0;
+	border-bottom-width: 0;
+	font:normal 10px Verdana;
+	line-height: 17px;
+	z-index: 100;
+	background-color: #F2F2F2;
+	text-align: left;
+}
+
+#titMenu{
+	font:verdana;
+	font-size:12px;
+	padding-left:35px;
+	padding-top:8px;
+	background-image:url(../img/bg-tit-menu.png);
+	width:172px;
+	height:23px;
+	color:#2E2E2E;
+}
+
+.submenu {
+	width: 205px;
+}
+
+.submenu a{
+	color: #FFFFFF;
+	width: 100%;
+	display: block;
+	text-indent: 3px;
+	border-bottom: 1px solid #FFFFFF;
+	padding: 1px 0;
+	text-decoration: none;
+	text-indent: 5px;
+}
+
+#conteudo-topo2 {
+	background-image: url(../img/bgiMenuTopo.gif);
+	background-repeat: repeat-x;
+}
+
+#conteudo-topo3 {
+	background-image: url(../img/bg-topo-restrito.gif);
+	background-position:center;
+	padding-bottom:10px;
+}
+
+
+/* -- CSS's usados no menu principal do portal Senior*/
+.menu-fechado{
+	background-image:url(../img/bgiMenu2.gif)
+}
+
+.bordaTblBorda {
+	border: 2px solid #5E0000;
+}
+.tblBorda{
+	background-color:#FFFFFF; 
+}
+
+.bgColorTabDados{
+	background-color:#003366;
+}
+
+.TitPagina {
+	font-family: "Tahoma", Verdana, Helvetica, sans-serif;
+	font-size: 18px;
+	font-weight: bold;
+	color: #2c286c;
+	text-align: center;
+	background-color:#FFFFFF;
+}
+
+.CampoTab{
+	font-family: Verdana;
+	font-size: 11px;
+	color: #000000;
+	background-color:#E2E7E9;
+	font-style: normal;
+	font-weight: normal;
+}
+
+.CampoTabAlter {
+
+	font-family: Verdana;
+	font-size: 11px;
+	color: #000000;
+	background-color:#FAE8BC;
+	font-weight: normal;
+}
+
+.DesCampoTab{
+	font-family: Verdana;
+	font-size: 11px;
+	font-weight: bold;
+	color: #454F42;
+	background-color:#D3D3D3;
+}
+.SubTitPagina {
+	font-family: "Tahoma", Verdana, Helvetica, sans-serif;
+	font-size: 14px;
+	font-weight: bold;
+	color: #2c286c;
+	text-align: left;
+}
+.campoForm, .campoReadOnly {
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-size:10px;
+	background-color:#ffffff;
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-top-color: #666666;
+	border-right-color: #a4c1db;
+	border-bottom-color: #a4c1db;
+	border-left-color: #666666;
+}
+.campoReadOnly {
+	background-color:#CCCCCC;
+}
+.btnForm {
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-size:10px;
+	font-weight:bold;
+}
+.desErro {
+	font-family: verdana;
+	font-size: 12px;
+	color: #CC0000;
+}
+.linkVisualizar {
+	font-family: verdana;
+	font-size: 11px;
+	color: #0000CC;
+	text-decoration: none;
+}
+a.linkVisualizar:hover {
+	text-decoration: underline;
+}
+.fundoLogin {
+	background-color: #ffffff;
+}
+
+.titMenu {
+	font-family: verdana;
+	font-size: 12px;
+	font-weight: bold;
+	color: #4B4B4B;
+
+}.titLogin {
+	font-family: "Tahoma", Verdana, Helvetica, sans-serif;
+	font-size: 14px;
+	font-weight: bold;
+	color:#333333;
+}
+.DesCampoLogin {
+	font-family: Verdana;
+	font-size: 11px;
+	font-weight: bold;
+	color: #4b4b4b;
+}
+.txt1 {
+	font-family: Arial;
+	font-size: 11px;
+	color: #000000;
+}
+.txt2 {
+	font-family: Arial;
+	font-size: 14px;
+	font-weight: bold;
+	color: #000000;
+}
+.TopSubTitPagina {
+
+	font-family: Verdana;
+	font-size: 15px;
+	font-weight: bold;
+	color: #8C8C8D;
+	text-align: left;
+}
+
+.caixa_login {
+	background-color:#FFF500;
+}
+
+img#logo_aurora {
+	margin-top:10px;
+	margin-left:20px;
+}
+
+.desNomUsu {
+	color:#2E2E2E;
+}
+
+.fonte-branco {
+	color: #FFFFFF;
+}
+
+.fonte-branco-13 {
+	color:#FFFFFF;
+	font-size:13px;
+}
+
+.fonte-azul-10 { font-size:10px; color:#CAE0F6; }
+a.fonte-azul-10:link { text-decoration: none; color:#CAE0F6; }
+a.fonte-azul-10:visited { text-decoration: none; color:#CAE0F6; }
+a.fonte-azul-10:hover { text-decoration: underline; color:#CAE0F6; }
+a.fonte-azul-10:active { text-decoration: none; color:#CAE0F6; }
+
+img#topo-logo {
+	margin-left:15px;
+	margin-top:5px;
+	float:left;
+}
+
+#topo-ar {
+	width:330px;
+	height:31px;
+	margin-top:13px;	
+	float:right;
+	padding:4px;
+}
+
+td#topo-ar-fonte {
+	font-family: "Trebuchet MS", Verdana, "Microsoft Sans Serif";
+	font-size:12px;
+	color:#FFFFFF;
+}
+
+#topo-opcoes {
+	background-image:url(../img/bg-barra-menu.gif);
+	height:10px;
+}
+
+td#topo-opcoes-a {
+	background-color:#d2d3d5;
+	color:#FF0000;
+	text-align:center;
+	font-weight:bold;
+	width:33%;
+}
+
+td#topo-opcoes-b {
+	background-color:#fe0000;
+	color:#FFFFFF;
+	text-align:center;
+	font-weight:bold;
+	width:33%;	
+}
+
+td#topo-opcoes-c {
+	background-color:#e0b95c;
+	color:#000000;
+	text-align:center;
+	font-weight:bold;	
+	width:33%;	
+}
+
+#topo-restrito {
+	width:100%;
+	height:70px;
+	background-color:#094e92;
+}

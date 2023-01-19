@@ -1,0 +1,577 @@
+// Esta variável seta o tempo de timeout utilizado para verificar se o relatório que está sendo
+// emitido irá demorar mais que 5 minutos. Se o relatório levar mais de 5 minutos para ser gerado
+// o sistema carrega uma tela informando o usuário que o relatório estará disponível para consulta
+// na tela de relatórios emitidos, isto para evitar que o sistema carregue a tela de CGi TiemOut no 
+// browser do cliente.
+var timeoutrelatorio = 295; // 4:55 minutos.
+var monitorTimer;
+var monitorTimeout;
+var monitorInterval = 15000; //tempo de verificacao se a comunicacao está ok com o servidor, em milisegundos.
+monitorTimer = setInterval("doOnlineCheck()", monitorInterval);
+
+//***********************************************************************************
+function doOnlineCheck()
+{
+  var imagem = document.getElementById('singlePixel');
+  if (imagem == null) {
+     imagem = document.createElement("IMG");
+                imagem.id = "singlePixel";
+                imagem.style.display = "none";
+                imagem.onerror = stopMonitor;
+				imagem.onload = function(){
+				                  window.clearTimeout(monitorTimeout);};
+				
+     document.body.appendChild(imagem);
+  }
+  imagem.src = 'imagens/singlepixel.png?' + Math.random();
+  monitorTimeout = setTimeout(function(){imagem.onerror()},14000);
+}
+
+function stopMonitor() {
+  window.clearInterval(monitorTimer);
+  window.clearTimeout(monitorTimeout); 
+  alert(TransStr("VT000040495","Erro de comunicação com o servidor"));
+}
+//***********************************************************************************
+function FazPergunta(pSql, pAsk) {
+  var strPesquisa2 = '';
+  var sql = pSql;
+
+  retorno = window.prompt(pAsk, '');
+  if (retorno != null)
+  {
+    retorno = retorno.toUpperCase();
+
+    i = sql.indexOf('#', sql);
+    if (i != -1)
+    {
+      strPesquisa2 = sql.substring(0, i);
+      strPesquisa2 = strPesquisa2 + retorno;
+      j = sql.indexOf('/', sql);
+      if (j == -1)
+           j = 9997;
+      strPesquisa2 = strPesquisa2 + sql.substring(i + 1, j);
+
+      sql = sql.substring (j+1,9999);
+      i = sql.indexOf('#', sql);
+      while (i != -1)
+      {
+         strPesquisa2 = strPesquisa2 + "%20" + 'OR*' + "%20" + sql.substring(0, i);
+         strPesquisa2 = strPesquisa2 + retorno;
+         j = sql.indexOf('/', sql);
+         if (j == -1)
+              j = 9997;
+         strPesquisa2 = strPesquisa2 + sql.substring(i + 1, j);
+         sql = sql.substring (j+1,9999);
+         i = sql.indexOf('#', sql);
+      }
+    }
+    return strPesquisa2;
+  }
+  return null;
+}
+
+
+//Verifica o Calculo Ativo e Altera o Título do Form caso não encontre
+//Para utilizar este recurso, o html deve fazer a importação do multilingua.js
+//aFrame = frame da página que contém o título
+//aTabela = Id da table do título (Criar uma propriedade id na table para utilizar esta rotina)
+//aFrameSet (Opcional) = Id do FrameSet da página (Criar um propriedade Id no FrameSet para utilizar esta rotina)
+//aRowsConfig (Opcional) = Configuração de visibilidade dos items do FrameSet.
+
+function VerificaCalculoAtivo(aFrame, aTabela, aFrameSet, aRowsConfig) {
+  var cal = GetCookieValue("CALCULOATIVO", self); 
+  if (cal == 0) {
+    var tabela = frames[aFrame].document.getElementById(aTabela);
+    var celula = tabela.tBodies[0].rows[0].cells[1];
+    celula.innerHTML = TransStr("VT000017259","Efetue a seleção de um código de cálculo");
+    
+    //Oculta frames que não devem aparecer no caso de inexistir o cálculo (Opcional)
+    if ((aFrameSet != "undefined") && (aRowsConfig != "undefined")) {
+       document.getElementById(aFrameSet).rows = aRowsConfig;
+    } 
+  }
+}
+
+function PesquisaLocalGeral(aSis, aCamRet, aAbrEmp, aTabOrg, aData, aNomPsq, aSourceForm, AbrEsp)
+{
+  var strPesquisa2 ='';
+  var sql = ' Upper(R016ORN.NOMLOC) LIKE \'%#%\'';
+
+  var s = FazPergunta(sql, TransStr("VT000017260",'Pesquisa de Local'));
+  if (s == null) 
+    return
+  else
+    strPesquisa2 = escape(s);
+  if (aAbrEmp == "") {
+    var xvalue = GetCookieValue("EMPRESAATIVA", window.opener);     
+	if (xvalue != "undefined")
+      aAbrEmp = xvalue;
+  }	
+  str = '&CAMRET=' + aCamRet + '&ABREMP=' + aAbrEmp + '&TABORG=' + aTabOrg + '&DATA=' + aData + '&NOMPSQ=' + aNomPsq + '&SOURCEFORM=' + aSourceForm + '&SQL_PESQUISA=' + strPesquisa2;
+  if (AbrEsp != null)
+    str = str + '&ABRESP=' + AbrEsp;
+  if (retorno != null)
+    open('https://senior.blumenau.sc.gov.br/restrito/conector?ACAO=RHPESQUISALOCAL&SIS=' + aSis + str, 'pesquisa');
+}
+
+function retornaLocal(recs, fields) {
+  for(var i=0; i < recs.length; i++) { 
+    recs[i]['CODLOC'] = '"' + recs[i]['CODLOC'] + '"';
+  }
+  ReturnFieldsAbrangencia(recs, fields);
+}
+
+function PesquisaLocal(aSis, aCamRet, aAbrEmp, aTabOrg, aData, aNomPsq, aSourceForm, AbrEsp)
+{
+  //PesquisaLocalGeral(aSis, aCamRet, aAbrEmp, aTabOrg, aData, aNomPsq, aSourceForm, AbrEsp);
+  PesquisaQuery(aSis,'', aNomPsq, aSourceForm, '', '', 'CODLOC/'+aCamRet, '', '', '', true, retornaLocal, {'TAG':'RHPESQUISALOCAL','ABREMP':aAbrEmp,'TABORG':aTabOrg,'DATA':aData});
+}
+
+function retornaCargo(recs, fields) {
+  for(var i=0; i < recs.length; i++) { 
+    recs[i]['CODCAR'] = '"' + recs[i]['CODCAR'] + '"';
+  }
+  ReturnFieldsAbrangencia(recs, fields);
+}
+
+//***********************************************************************************
+function PesquisaCargo(aSis, aCamRet, aNumEmp, aEstCar, aData, aNomPsq, aSourceForm)
+{
+  /*var str = '';
+  var sql = ' Upper(R024CAR.TITCAR) LIKE \'%#%\'';
+
+  var s = FazPergunta(sql, TransStr("VT000017261",'Pesquisa de Cargo'));
+  if (s == null)
+     return
+  else
+     strSql = escape(s);
+
+  if (aNumEmp == "") {
+    var xvalue = GetCookieValue("EMPRESAATIVA", window.opener);
+  	if (xvalue != "undefined")
+       aNumEmp = xvalue;
+  }
+
+  str = '&CAMRET=' + aCamRet + '&ABREMP=' + aNumEmp + '&ESTCAR=' + aEstCar + '&DATA=' + aData + '&NOMPSQ=' + aNomPsq + '&SOURCEFORM=' + aSourceForm + '&SQL_PESQUISA=' + strSql;
+  open('https://senior.blumenau.sc.gov.br/restrito/conector?ACAO=RHPESQUISACARGO&SIS=' + aSis + str, 'pesquisa');*/
+  
+  PesquisaQuery(aSis, '', aNomPsq, aSourceForm,  '', '', 'CODCAR/'+aCamRet,'', '', '', true, retornaCargo, {'TAG':'RHPESQUISACARGO','ABREMP':aNumEmp, 'ESTCAR':aEstCar,'DATA':aData})
+ 
+}
+
+//***********************************************************************************
+// Função que retorna o valor do Cookie especificado
+// Parâmetros: 
+//   aCookieName - nome do cookie 
+//   aFrameInicial - frame inicial para a pesquisa dos cookies. Este frame deve estar vinculado ao frame principal do Sistema 
+function GetCookieValue(aCookieName, aFrameInicial)
+{
+  var ic, indf, xCookiename;
+  var lcframe = aFrameInicial;
+  var lcachou = false;
+  var lcachouCookie = 0;
+  
+  while (lcachouCookie == 0)
+  {
+    // separa o cookie pelos caracteres ";" 
+    var thisCookie = lcframe.document.cookie.split(";");
+    for (ic=0; ic < thisCookie.length; ic++)
+    {
+      xCookieName = thisCookie[ic].split("=")[0];
+      xCookieName=xCookieName.replace(' ','');
+      xCookieName.toUpperCase;  
+      aCookieName=aCookieName.replace(' ','');
+      aCookieName.toUpperCase;  
+      if(xCookieName==aCookieName){
+        lcachouCookie = 1;
+        return unescape(thisCookie[ic].split("=")[1]);
+      }
+    }
+
+    // já encontrou o frame RODAPE e mesmo assim não localizou o cookie desejado sai do looping
+    if (lcachou){
+      lcachouCookie = 1;
+    }
+
+    // Procura o frame de rodapé, que contém o cookie gravado pelo Monitor 
+    while (!lcachou)
+    {
+      // Se lcframe possuir mais frames, verifica se encontra o rodape 
+      if (lcframe.frames.length > 0)
+      {
+          for (indf=0; indf < lcframe.frames.length; indf++)
+             if (lcframe.frames[indf].name == "RODAPE")
+                lcachou = true;
+      }
+
+      // Se não achou o frame, pega o frame anterior 
+      if (!lcachou)
+      {
+        // Verifica se o cookie existe no opener 
+        var linkConnector = lcframe.document.location.href.toUpperCase();
+        
+        if (linkConnector.indexOf("CONECTOR")!=-1){
+           lcachou = true;
+		   //Achou o conector, assim achará o cookie 
+		   break; 
+        } 
+        
+        if (lcframe == top)
+        {
+           if (lcframe.opener != null) {
+             lcframe = lcframe.opener;
+           }
+           else {
+             lcachou = true;
+             break;
+           }
+        }
+        // Se mesmo assim não encontrar, retorna a mensagem  
+//        if (lcframe == top) 
+//          return TransStr("VT000017262",'Não Achou');
+        
+        //Chegou no nível maximo
+        if (lcframe.parent == null) {
+             lcachou = true;
+             break;
+         }
+
+        if (!lcachou) {
+          lcframe = lcframe.parent;
+        }
+        
+      }
+    }
+  }
+}
+
+//***********************************************************************************
+// Concatena todos os Itens Selecionados Num CheckBox e retorna numa string separados por "|"
+
+function ConcatCheckBox(CampoCheck, aQtdLin)
+{
+var i;
+var result = '';
+
+   if (typeof(CampoCheck) != "undefined")
+   {
+
+    if   (aQtdLin == 1)
+         { if   (CampoCheck.checked == true)
+                result += CampoCheck.value + '|';
+
+           return result;
+         }
+    else { for (i=0;i < CampoCheck.length ; i++)
+               { if   (CampoCheck[i].checked == true)
+                      result += CampoCheck[i].value + '|';
+               }
+
+           return result;
+         }
+   }
+   else
+   {
+     return result;
+   }
+}      
+//***********************************************************************************
+// Retorna true se o valor é inválido
+function ValueNull(value) {
+  result = true;
+  if (typeof(value) == 'string') {
+    if ( (value.length > 0) && (value != '0' ) ) 
+      result = false;
+  } else {
+    if (typeof(value) == 'number') {
+      if (value != 0) 
+        result = false;
+    }
+  } 
+  return(result);
+}
+
+//***********************************************************************************
+/* possibilita passar parâmetros para páginas HTML (utilizados no javascript).
+   recebe uma URI (document.location.href) e retorna um array 
+   com os parâmetros (passados como ancora no URI, separados por "+") */
+function RetParUrl (str_url) {
+  // inicio (âncora)
+  var aux_ini_par = (str_url.indexOf("#") > 0) ? (str_url.indexOf("#")+1) : 0;
+
+  // quantidade caracteres âncora (até query string)
+  var aux_qtdchar_par = (str_url.indexOf("?") > aux_ini_par) ? (str_url.indexOf("?") - aux_ini_par - 1) : (str_url.length - aux_ini_par);
+
+  if (aux_ini_par != 0) {
+    var aux_str_par = str_url.substr(aux_ini_par, aux_qtdchar_par);
+    return(aux_str_par.split("+"));
+  }else{
+    return("");
+  }
+}
+
+//***********************************************************************************
+// Seleciona o "Item" (String) no objeto "ObjLista" (ComboBox)
+// Utilizado para compatibilidade Netscape / IE.
+function SelItemLista(Item,ObjLista) {
+  var indatu = 0;
+  result = false;
+  while ((indatu < ObjLista.length) && (ObjLista[indatu].value != Item)) {
+    indatu++;
+  }
+  if (indatu < ObjLista.length) {
+    ObjLista.selectedIndex= indatu;
+    result = true;
+  }
+  return(result);
+}
+
+//***********************************************************************************
+// ------------------- Limita o Tamanho máximo campo -------------------
+// onkeyup='tammax(this,5)'
+function tammax(campopar,tammaxpar){
+  if (campopar.value.length > tammaxpar) {
+    campopar.value = campopar.value.substr( 0, tammaxpar);
+    alert(TransStr("VT000017263","Este é o tamanho máximo permitido!"));
+  }
+}
+
+// -------------- Função utilizada para pesquisar Colaboradores nas telas de entrada --------------
+function PesquisaColaboradorRel(sis, table, fieldret, filterfields, whereclause, title, text, sql,titulo,order,source, linkfield, tag)
+{   
+  PesquisaQuery(sis, table, 'R034FUN', 'FR034FUN', whereclause, '*', fieldret, '', '', source, true, retornaNumCadRel);
+}
+
+function PesquisaCandidatoRel(sis, table, fieldret, filterfields, whereclause, title, text, sql,titulo,order,source, linkfield, tag)
+{
+  Pesquisa(sis, table, fieldret, filterfields, whereclause, TransStr("VT000017265",'Pesquisa de Candidato'), '', ' Upper(NomCan) LIKE \'%#%\'', '', 'NomCan','','','ExecRegra')
+}
+
+function PesquisaEscalaRel(sis, table, fieldret, filterfields, whereclause, title, text, sql,titulo,order,source, linkfield, tag)
+{
+  Pesquisa(sis, table, fieldret, filterfields, whereclause, TransStr("VT000017266",'Pesquisa de Escala'), '', ' Upper(NomEsc) LIKE \'%#%\'', '', '','','','ExecRegra')
+}
+
+function PesquisaCentroCustoRel(sis, table, fieldret, filterfields, whereclause, title, text, sql,titulo,order,source, linkfield, tag)
+{
+  Pesquisa(sis, table, fieldret, filterfields, whereclause, TransStr("VT000017909",'Pesquisa de Centro de Custo'), '', ' Upper(NomCcu) LIKE \'%#%\'', '', '','','','ExecRegra')
+}
+
+function PesquisaCidadeRel(sis, table, fieldret, whereclause, source,tag)
+{
+  PesquisaQuery(sis, table, 'R074CID_02', 'FR074CID', whereclause, '*', fieldret, '', '', source, true, retornaCidadeRel, {'TAG':tag});
+}
+
+/*Função CallBack para uso nos relatórios*/
+function retornaCidadeRel(recs, fields) {
+   for(var i=0; i < recs.length; i++) { 
+     recs[i]['CODCID'] = recs[i]['CODCID'].replace(/\./g,"");
+  }
+  ReturnFieldsAbrangencia(recs, fields);
+}
+
+
+function retornaNumCadRel(recs, fields) {
+   for(var i=0; i < recs.length; i++) { 
+     recs[i]['NUMCAD'] = recs[i]['NUMCAD'].replace(/\./g,"");
+  }
+  ReturnFieldsAbrangencia(recs, fields);
+}
+
+/*Função CallBack para uso nas telas da web. Hoje é apenas utilizada na tela de Outras Empresas*/
+function retornaCidade(recs, fields)
+{
+  recs['CODCID'] = recs['CODCID'].replace(/\./g,"");
+  ReturnFieldsNormal(recs, fields);
+}
+
+function RemovePonto(aCampo)
+{
+  return aCampo.replace(/\./g,"");
+}
+
+//-------------------------- FUNCOES PARA TRATAMENTO DO HELP POR CAMPO --------------------------
+// Verifica se cliente usa help por campo.
+function VerificaeHabilitaHelpCampos()
+{
+  if (GetCookieValue("USAHELPCAMPOS", self) == "S")
+    HabilitaHelpCampos();
+}
+
+// Função para habilitar campos do help.
+function HabilitaHelpCampos()
+{
+  for (var i=0; i < HelpCampos.length; i++)
+  {
+	if (HelpCampos[i][1] != '')
+	{
+	  if (document.getElementById(HelpCampos[i][0]) != null)
+	  {
+	    document.getElementById(HelpCampos[i][0]).style.visibility = 'visible';
+		document.getElementById(HelpCampos[i][0]).style.display = 'block';
+	  }
+	}
+  }
+}
+
+// Função para mostrar o html do help quando selecionado.
+function MostraHelpCampo(Identificador)
+{
+  for (var i=0; i < HelpCampos.length; i++)
+  {
+	if (HelpCampos[i][0] == Identificador)
+	{
+	  eval(HelpCampos[i][1]);
+	}
+  }
+}
+
+// Verifica se tem calculo selecionada, caso contrario retorna false.
+function TemCalculoSelecionado()
+{
+  if (GetCookieValue("CALINIAPU", self) == null)
+  {
+    alert(TransStr("VT000017259","Efetue a seleção de um código de cálculo"));
+    return(false);
+  }
+  else	  
+    return(true);
+}
+
+function ResizeMemo(elementName, operacao){
+  if (operacao == '+'){
+    document.getElementById(elementName).rows++;
+  } else {
+    if (document.getElementById(elementName).rows >= 5){
+      document.getElementById(elementName).rows--;
+    }
+  }
+}
+
+function MascaraNota(objTextBox, SeparadorMilesimo, SeparadorDecimal, e){
+    var sep = 0;
+    var key = '';
+    var i = j = 0;
+    var len = len2 = 0;
+    var strCheck = '0123456789';
+    var aux = aux2 = '';
+    var whichCode = (window.Event) ? e.which : e.keyCode;
+    if ((whichCode == 13) || (whichCode == 8) || (e.keyCode == 9)) return true;
+    key = String.fromCharCode(whichCode); // Valor para o código da Chave
+    if (strCheck.indexOf(key) == -1) return false; // Chave inválida
+    len = objTextBox.value.length;
+    for(i = 0; i < len; i++)
+        if ((objTextBox.value.charAt(i) != '0') && (objTextBox.value.charAt(i) != SeparadorDecimal)) break;
+    aux = '';
+    for(; i < len; i++)
+        if (strCheck.indexOf(objTextBox.value.charAt(i))!=-1) aux += objTextBox.value.charAt(i);
+    aux += key;
+    len = aux.length;
+	
+    // Aplica a máscara nos campos, respeitando o tamanho máximo
+    if (len >= objTextBox.maxLength) return false;
+	
+    if (len == 0) objTextBox.value = '';
+    if (len == 1) { 
+	  if (objTextBox.maxLength > 3) 
+	    objTextBox.value = '0'+ SeparadorDecimal + '0' + aux;
+	  else
+	    objTextBox.value = '0'+ SeparadorDecimal + aux;	  
+	}
+    if (len == 2) {
+	  if (objTextBox.maxLength > 3) 
+	    objTextBox.value = '0'+ SeparadorDecimal + aux;
+	  else
+	    objTextBox.value = aux.charAt(0) + SeparadorDecimal + aux.charAt(1);
+	}
+    if (len > 2) {
+        aux2 = '';
+        for (j = 0, i = len - 3; i >= 0; i--) {
+            if (j == 3) {
+                aux2 += SeparadorMilesimo;
+                j = 0;
+            }
+            aux2 += aux.charAt(i);
+            j++;
+        }
+        objTextBox.value = '';
+        len2 = aux2.length;
+        for (i = len2 - 1; i >= 0; i--)
+        objTextBox.value += aux2.charAt(i);
+        objTextBox.value += SeparadorDecimal + aux.substr(len - 2, len);
+    }
+    return false;
+}
+
+function LimpaCookies() {
+  
+    document.cookie = "BASE=; expires=Thu, 01 Jan 1970 00:00:00 GMT;";
+    document.cookie = "USER=; expires=Thu, 01 Jan 1970 00:00:00 GMT;";
+    document.cookie = "CONNECTION=; expires=Thu, 01 Jan 1970 00:00:00 GMT;";
+    document.cookie = "DIRHTML=; expires=Thu, 01 Jan 1970 00:00:00 GMT;";  	
+    document.cookie = "EMPRESAATIVA=; expires=Thu, 01 Jan 1970 00:00:00 GMT;";
+    document.cookie = "CALCULOATIVO=; expires=Thu, 01 Jan 1970 00:00:00 GMT;";
+    document.cookie = "CALINIAPU=; expires=Thu, 01 Jan 1970 00:00:00 GMT;";
+    document.cookie = "CALFIMAPU=; expires=Thu, 01 Jan 1970 00:00:00 GMT;";
+    document.cookie = "CALINIACE=; expires=Thu, 01 Jan 1970 00:00:00 GMT;";
+    document.cookie = "CALFIMACE=; expires=Thu, 01 Jan 1970 00:00:00 GMT;";
+    document.cookie = "CALTIPCAL=; expires=Thu, 01 Jan 1970 00:00:00 GMT;";
+    document.cookie = "CALPERREF=; expires=Thu, 01 Jan 1970 00:00:00 GMT;";
+    document.cookie = "CALDATPAG=; expires=Thu, 01 Jan 1970 00:00:00 GMT;";
+    document.cookie = "CALINICMP=; expires=Thu, 01 Jan 1970 00:00:00 GMT;";
+    document.cookie = "CALFIMCMP=; expires=Thu, 01 Jan 1970 00:00:00 GMT;";
+    document.cookie = "USAHELPCAMPOS=; expires=Thu, 01 Jan 1970 00:00:00 GMT;";
+    document.cookie = "USUSUBPERMISSAO=; expires=Thu, 01 Jan 1970 00:00:00 GMT;";
+    document.cookie = "HTMPRINCIPAL=; expires=Thu, 01 Jan 1970 00:00:00 GMT;";
+    document.cookie = "USUSUBDESID=; expires=Thu, 01 Jan 1970 00:00:00 GMT;";
+    document.cookie = "LOGINCRACHA=; expires=Thu, 01 Jan 1970 00:00:00 GMT;";
+    document.cookie = "CRACHA=; expires=Thu, 01 Jan 1970 00:00:00 GMT;";
+    document.cookie = "PERFILATIVO=; expires=Thu, 01 Jan 1970 00:00:00 GMT;";
+} 
+
+//Cria um cookie com o tempo de expiração em dias
+function createCookie(name,value,days) {
+	if (days) {
+		var date = new Date();
+		date.setTime(date.getTime()+(days*24*60*60*1000));
+		var expires = "; expires="+date.toGMTString();
+	}
+	else var expires = "";
+	document.cookie = name+"="+value+expires+";";
+}
+
+function readCookie(name) {
+	var nameEQ = name + "=";
+	var ca = document.cookie.split(';');
+	for(var i=0;i < ca.length;i++) {
+		var c = ca[i];
+		while (c.charAt(0)==' ') c = c.substring(1,c.length);
+		if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+	}
+	return null;
+}
+
+function eraseCookie(name) {
+	createCookie(name,"",-1);
+}
+
+// Efetua a Ação de Logoff dos Sistemas 
+function Logoff(Sigla){
+  try{
+      if (readCookie("logoff") == "off") {
+	    eraseCookie("logoff");
+	    return;
+	 }
+  }catch (e){}
+	
+  xbase = 'https://senior.blumenau.sc.gov.br/restrito/conector?ACAO=LOGOFF&SIS='+Sigla+'&PRXPAG=rhclose.htm';
+  xbase = xbase + '&RANDOM=' + Math.floor(Math.random() * 1000000000);  
+  loadXMLDocSin(9,xbase);
+}
+
+//Retira espaçoes e quebra de linha de uma string
+String.prototype.trim = function(){
+ return this.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
+}
+
