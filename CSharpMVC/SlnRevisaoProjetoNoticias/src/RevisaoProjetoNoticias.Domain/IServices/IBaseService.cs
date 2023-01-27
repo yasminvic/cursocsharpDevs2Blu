@@ -8,9 +8,9 @@ namespace RevisaoProjetoNoticias.Domain.IServices
 {
     public interface IBaseService<T> where T: class
     {
-        IQueryable<T> FindAll();
+        List<T> FindAll();
         Task<T> FindById(int id);
         Task<int> Save(T entity);
-        Task<int> Delete(T entity);
+        Task<int> Delete(int id);
     }
 }

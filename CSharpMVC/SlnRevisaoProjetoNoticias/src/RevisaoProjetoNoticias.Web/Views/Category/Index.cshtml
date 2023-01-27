@@ -1,0 +1,61 @@
+﻿@model IEnumerable<RevisaoProjetoNoticias.Domain.DTO.CategoryDTO>
+
+
+<p>
+    <a class="btn btn-primary" asp-action="Create">Nova Categoria</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.name)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+                <tr>
+                    <td>
+                    @Html.DisplayFor(modelItem => item.id)
+                    </td>
+                    <td>
+                    @Html.DisplayFor(modelItem => item.name)
+                    </td>
+                    <td>
+                        <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.id">Edit</a> |
+                        <a class="btn btn-danger" href="#" onclick="deleteCategoria(@item.id)">Delete</a>
+                            <a class="btn btn-warning" asp-action="Details" asp-route-id="@item.id">Details</a>
+                    </td>
+                </tr>
+        }
+    </tbody>
+</table>
+
+<div class="modal" id="modal" tabindex="-1"></div>
+
+@section Scripts {
+        <script>
+            const deleteCategoria = (id) => {
+                if(confirm(`Deseja realmente excluir o registro ${id}?`)) {
+                    $.ajax({
+                        url: `@Url.Action("Delete")`,
+                        method: 'POST',
+                        data: {
+                            id: id
+                        },
+                        success: (resp) => {
+                            if(resp.code == '200') {
+                                console.log(resp);
+                                window.location.reload();
+                            }
+                        }
+                    });
+                }
+            }
+        </script>
+}

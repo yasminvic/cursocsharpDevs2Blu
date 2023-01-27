@@ -1,4 +1,5 @@
 ﻿using RevisaoProjetoNoticias.Domain.DTO;
+using RevisaoProjetoNoticias.Domain.Entities;
 using RevisaoProjetoNoticias.Domain.IRepositories;
 using RevisaoProjetoNoticias.Domain.IServices;
 using System;
@@ -17,24 +18,49 @@ namespace RevisaoProjetoNoticias.Application.Service.SQLServerServices
             _repository = repository;
         }
 
-        public Task<int> Delete(CategoryDTO entity)
+        public async Task<int> Delete(int id)
         {
-            throw new NotImplementedException();
+            var entity = await _repository.FindById(id);
+            return await _repository.Delete(entity);
         }
 
-        public IQueryable<CategoryDTO> FindAll()
+        public List<CategoryDTO> FindAll()
         {
-            throw new NotImplementedException();
+            return _repository.FindAll().Select(c => new CategoryDTO()
+            {
+                id = c.Id,
+                name = c.Name
+            }).ToList();
+            
         }
 
-        public Task<CategoryDTO> FindById(int id)
+        public async Task<CategoryDTO> FindById(int id)
         {
-            throw new NotImplementedException();
+            Category category =  await _repository.FindById(id);
+            return new CategoryDTO
+            {
+                id = category.Id,
+                name = category.Name
+            };
+
+            //ou podia ter feito assim
+            //var dto = new CategoryDTO();
+            //return dto.mapToDTO(await _repository.FindById(id));
         }
 
         public Task<int> Save(CategoryDTO entity)
         {
-            throw new NotImplementedException();
+            //se for maior que zero, quer dizer que essa entity e já existe e está sendo editada
+            if(entity.id > 0)
+            {
+                return _repository.Update(entity.mapToEntity());
+            }
+            //se for menor de zero, quer dizer que essa entity ainda nao foi criada, por isso o id é menor que zero
+            else
+            {
+                return _repository.Save(entity.mapToEntity());
+            }
+            
         }
     }
 }

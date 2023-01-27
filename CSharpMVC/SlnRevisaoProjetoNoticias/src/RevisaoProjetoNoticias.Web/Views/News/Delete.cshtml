@@ -1,0 +1,10 @@
+﻿@model RevisaoProjetoNoticias.Domain.DTO.NewsDTO
+
+<h1>Are you sure that you want to delete this News?
+    <strong>@Model.title</strong>
+</h1>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="id"/>
+    <input class="btn btn-danger" type="submit" value="Delete"/>
+</form>

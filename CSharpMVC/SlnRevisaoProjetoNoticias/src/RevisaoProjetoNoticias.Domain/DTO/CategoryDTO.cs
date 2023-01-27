@@ -1,4 +1,5 @@
 ﻿using RevisaoProjetoNoticias.Domain.Entities;
+using System.ComponentModel.DataAnnotations;
 using System.Linq.Expressions;
 
 namespace RevisaoProjetoNoticias.Domain.DTO
@@ -7,6 +8,7 @@ namespace RevisaoProjetoNoticias.Domain.DTO
     {
         //em minusculo pq é o padrao web
         public int id { get; set; }
+        [Display(Name = "Categoria")]
         public string name { get; set; }
         public virtual ICollection<NewsDTO>? newsList { get; set; }
 
@@ -29,10 +31,10 @@ namespace RevisaoProjetoNoticias.Domain.DTO
                 id = category.Id,
                 name = category.Name,
                 //estamos fazendo com que cada objeto da lista vai ser convertido em NewsDTO
-                newsList = category.NewsList.Select(c => new NewsDTO()
-                {
+                //newsList = category.NewsList.Select(c => new NewsDTO()
+                //{
 
-                }).ToList()
+                //}).ToList()
             };
         }
     }
