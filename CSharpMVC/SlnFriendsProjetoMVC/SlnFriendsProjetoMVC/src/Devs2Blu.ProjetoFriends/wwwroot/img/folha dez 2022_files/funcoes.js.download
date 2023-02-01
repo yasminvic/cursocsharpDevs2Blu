@@ -1,0 +1,578 @@
+// Ivan Carlos Junges - Senior Sistemas
+// Variaveis do sistema
+var varSisMsgError1 = "Pesquisa não retornou registros."; // mensagem de erro para não retorno de registros em uma pesquisa
+var hTelaSubtrai = 80; // tamanho a ser sugtraido do height, para aparecer a barra de status;
+var wTelaSubtrai = 12; // tamanho a ser sugtraido do width;
+var globalTabelas = new Array();
+var globalColOrd = -1;
+var globalColOrdAux = 999;
+var globalInverter = false;
+var globalFiltro = new Array(); // numCol|Valor
+hideMenuTimer = false;
+hideMenuTimer = false;
+//**************************
+
+// Atribuir valor a campos text
+function atribuiValText(idCampo,val){
+	if (val==" ")
+		val = "";
+	document.getElementById(idCampo).value = val;
+}
+
+function abreJanelaPortal(){
+	var url = 'https://senior.blumenau.sc.gov.br/restrito/conector?ACAO=EXECUTAREGRA&SIS=FP&REGRA=301';
+	var vHeight = (screen.height - hTelaSubtrai);
+	var vWidth = (screen.width - wTelaSubtrai );
+	curriculo=window.open(url,"","left=0,top=0,width=" + vWidth  + ",height=" + vHeight + ",scrollbars=no,alwaysRaised=yes,resizable=no,status=yes");
+	}
+
+// Atribuir valor a campos do tipo radio
+function atribuiValRadio(nomCampo,val){
+	var objCampo = document.form1[nomCampo]
+	for(i=0;i<objCampo.length;i++)
+		if (objCampo[i].value == val)
+			objCampo[i].checked = true;
+}
+
+// Atribuir valor a campos Box
+function atribuiValBox(idCampo){
+	document.getElementById(idCampo).checked = true;
+}
+
+function habilitaSubLoc(index){
+if (index == 0) 
+	document.form1.EAbrLocSub.disabled=true;
+else 
+	document.form1.EAbrLocSub.disabled=false;
+}
+
+// Abre a Url solicitada pelo menu
+function AbreOpcao(url){
+	if (url == "" || url == " " )
+		return false;
+	obj = parent.document.getElementById("btnVoltar");
+	obj.style.display = '';
+	obj = parent.document.getElementById("ifCont");
+	obj.src = url;
+}
+
+/* remove todas as linhas de uma determinada tabela deixando apenas o titulo da tabela*/
+function limpaTabela(NomTabela){
+	var objTab = document.getElementById(NomTabela);
+	while (objTab.rows.length >1 ){objTab.deleteRow(objTab.rows.length - 1); } // remove linhas;	
+}
+/*
+// Funcao que adiciona linhas e colunas com a class informada
+// deverá vir editado da seguinte forma:'nomTab','Col1|Col2|Col3&Col1|Col2|Col3','Class','ClassLinhaImp'
+function addLinCol(NomTabela,LinnhasColunas,nomClass,nomAlterClass){
+	var objTab = document.getElementById(NomTabela);
+	var varLinhas = LinnhasColunas.split("&"); // quebrando linhas
+	// como o mode de insercao é pilha devo inverter, para o primeiro registro ficar em primeiro e nao em ultimo
+	for (i=0;i<varLinhas.length;i++){
+		//insere a nova linha
+		var objRow = objTab.insertRow(objTab.rows.length);
+		//quebra as colunas
+		objRow.onmouseover="destaque(this)";
+		objRow.onmouseout="naoDestaque(this)";
+		var varColunas = varLinhas[i].split("|"); // quebrando linhas
+		for (j=0;j<varColunas.length;j++){
+			var objCell = objRow.insertCell(objRow.cells.length);
+			objCell.align = objTab.rows[objTab.rows.length-2].cells[j].align // recebe o alinhamento da linha titulo
+			objCell.innerHTML = varColunas[j]; // seta valores a coluna
+			if ((i%2) != 0 && nomAlterClass!="" )
+				objCell.className = nomAlterClass; // seta a className a coluna
+			else
+				objCell.className = nomClass; // seta a className a coluna
+		}
+	}
+}
+*/
+
+
+
+// funcao para pegar uma variavel GET
+function getQueryString(key){
+	var url = new String(location.href);
+	var rxp = new RegExp('[?&]' + key + '{1}=[^&]*','gi');
+	var valor = new String('');
+	var res = new Array(rxp.exec(url));
+	var itm = new String('');
+	var pos=new Number(0);
+	if (res.length == 1){
+		itm = String(res[0]);
+		pos = itm.search(/[=]/);
+		valor = itm.slice(pos+1 );
+	}
+	return valor;
+}
+
+function geraMenu(tipo){
+	parent.NodoPadrao = tipo;
+	parent.TitMenu = tipo;
+	NoOffFirstLineMenus = leXML(tipo,parent.getXML());
+	varTitMenu = getTitMenu(tipo);
+	document.getElementById("perfilUsado").innerHTML = varTitMenu;
+	Go();
+}
+
+function getTitMenu(tipo){
+	if (tipo=="Gerencial"){
+		return " Perfil Gerencial";
+	}
+	else {
+		return " Perfil Colaborador";
+	}
+}
+
+
+
+function hideDiv(idDiv){
+	var divMenu = document.getElementById(idDiv);
+	divMenu.style.visibility = "hidden";
+}
+
+
+// pega a posicao x do objeto e soma com x
+function moveXbySlicePos (x, img) { 
+	if (!document.layers) {
+		var onWindows = navigator.platform ? navigator.platform == "Win32" : false;
+		var macIE45 = document.all && !onWindows && getExplorerVersion() == 4.5;
+		var par = img;
+		var lastOffset = 0;
+		while(par){
+			if( par.leftMargin && ! onWindows ) x += parseInt(par.leftMargin);
+			if( (par.offsetLeft != lastOffset) && par.offsetLeft ) x += parseInt(par.offsetLeft);
+			if( par.offsetLeft != 0 ) lastOffset = par.offsetLeft;
+			par = macIE45 ? par.parentElement : par.offsetParent;
+		}
+	} else if (img.x) x += img.x;
+	return x;
+}
+
+// pega a posicao y do objeto e soma com y
+
+function moveYbySlicePos (y, img) {
+	if(!document.layers) {
+		var onWindows = navigator.platform ? navigator.platform == "Win32" : false;
+		var macIE45 = document.all && !onWindows && getExplorerVersion() == 4.5;
+		var par = img;
+		var lastOffset = 0;
+		while(par){
+			if( par.topMargin && !onWindows ) y += parseInt(par.topMargin);
+			if( (par.offsetTop != lastOffset) && par.offsetTop ) y += parseInt(par.offsetTop);
+			if( par.offsetTop != 0 ) lastOffset = par.offsetTop;
+			par = macIE45 ? par.parentElement : par.offsetParent;
+		}		
+	} else if (img.y >= 0) y += img.y;
+	return y;
+}
+
+
+function showDivMsg (idObj,idDiv,objHid){ // igual showDiv, mas com o nome do camop hidden onde esta a msg
+	objHid = document.getElementById(objHid);
+	var msg = objHid.value;
+	desDiv  = "<textarea class='campoForm' id='txtGeral' cols='28' rows='3'>" + msg + "</textarea><br><br>";
+	desDiv += "<a href='javascript:document.getElementById(\"" + objHid.id + "\").value = document.getElementById(\"txtGeral\").value;document.getElementById(\"txtGeral\").value = \"\";hideDiv(\"" + idDiv + "\");void(-1);'>salvar</a> &nbsp;&nbsp;";
+	desDiv += "<a href='javascript:document.getElementById(\"txtGeral\").value = \"\";hideDiv(\"" + idDiv + "\");void(-1);'>cancelar</a>";
+	showDiv(idObj,idDiv,desDiv);
+}
+
+
+function showDiv(idObj,idDiv,descricao){ // Id da referência (botao), Id da Div, Msg da DIV
+	var divMenu = document.getElementById(idDiv);
+	var objBtn = document.getElementById(idObj);
+	x = moveXbySlicePos (-190, objBtn );
+	if (x <0 ) x = 1;
+	y = moveYbySlicePos (20, objBtn );
+	divMenu.style.pixelTop = y;
+	divMenu.style.top = divMenu.style.pixelTop + "px";
+	divMenu.style.pixelLeft = x;
+	divMenu.style.left = divMenu.style.pixelLeft + "px";
+	divMenu.innerHTML = descricao;
+	divMenu.style.visibility = "visible";
+}
+// para a tela do SAC
+function  verTramite(CodSol)
+{
+	window.location = "https://senior.blumenau.sc.gov.br/restrito/conector?ACAO=EXECUTAREGRA&CODSOL=" + CodSol + "&SIS=FP&REGRA=315&STATUS=CONSULTAR";	
+}
+
+
+
+/****** ORDENACAO *************/
+// Funcao que adiciona linhas e colunas com a class informada
+// deverá vir editado da seguinte forma:'nomTab','Col1|Col2|Col3&Col1|Col2|Col3','Class','ClassLinhaImp'
+function addLinCol(NomTabela,LinnhasColunas,nomClass,nomAlterClass){
+	globalTabelas[NomTabela] = new Array(); // adiciona no array de tabelas
+	var objTab = document.getElementById(NomTabela); // tabela
+	var varLinhas = LinnhasColunas.split("&"); // quebrando linhas
+	countLinha = 1;
+	for (i=0;i<varLinhas.length;i++){
+		//quebra as colunas
+		var varColunas = varLinhas[i].split("|"); // quebrando linhas
+    	// verifica se há filtro e insere a nova linha
+		if (globalFiltro[NomTabela] == null)
+			filtro = null;
+		else
+			filtro = globalFiltro[NomTabela].split("|");
+
+		var objRow = objTab.insertRow(objTab.rows.length);
+		if ((filtro != null) && ( ! (eval("varColunas[(filtro[0])] " + filtro[2] + "(filtro[1])")))){ // dentro deste array deve ser guardado NumCol|Valor
+			objRow.style.display = "none";
+		}else countLinha++;
+			globalTabelas[NomTabela][i] = new Array(); // ARRAY DE COLUNAS
+			for (j=0;j<varColunas.length;j++){
+				var objCell = objRow.insertCell(objRow.cells.length);
+				objCell.align = objTab.rows[objTab.rows.length-2].cells[j].align // recebe o alinhamento da linha titulo
+				objCell.innerHTML = varColunas[j]; // seta valores a coluna
+
+				globalTabelas[NomTabela][i][j]=varColunas[j]; // popula o array de linhas com colunas;
+				if (nomClass != "")
+					globalTabelas[NomTabela]["class"] = nomClass; // guardo no array a class usada
+				if (nomAlterClass != "")
+					globalTabelas[NomTabela]["alterClass"] = nomAlterClass; // guardo no array a class usada
+				if (((countLinha%2) != 0) && (nomAlterClass!=""))
+					objCell.className = nomAlterClass; // seta a className a coluna
+				else
+					objCell.className = nomClass; // seta a className a coluna
+			}
+	}
+}
+
+
+function ordenaTab(nomTabela,numCol,tipo) // tipo: numero, alfa, data (é aceito o formato dd/mm/yyyy ou dd/mm/yyyy hh:mm
+{
+	tipoDado = tipo
+	strCmd = "";
+	globalColOrd = numCol;
+	if ( globalTabelas[nomTabela] != "" && globalTabelas[nomTabela].length <=1 ){
+		return false;
+	}
+	if (globalColOrdAux == globalColOrd)
+		globalInverter = !globalInverter;
+	else
+		globalInverter = false;
+	globalColOrdAux = globalColOrd
+
+	globalTabelas[nomTabela].sort(str_sort);
+	for (i=0;i<globalTabelas[nomTabela].length;i++){
+		if (strCmd != "") strCmd += "&";
+		strCmd2 = "";
+		for (j=0;j<globalTabelas[nomTabela][i].length;j++){
+			if (strCmd2 != "") strCmd2 += "|";
+				strCmd2 += globalTabelas[nomTabela][i][j];
+		}
+		strCmd = strCmd + strCmd2;
+	}
+	var objTab = document.getElementById(nomTabela);
+	qtdLinhas = objTab.rows.length -1;
+	for (i=qtdLinhas;i>0;i--) objTab.deleteRow(i);
+    addLinCol(nomTabela,strCmd,globalTabelas[nomTabela]["class"],globalTabelas[nomTabela]["alterClass"]);
+}
+
+
+function str_sort ( a, b )
+{
+  if (globalColOrd == -1) return false;
+  var res = 0;
+  var v1, v2;
+  if (tipoDado == "alfa") {
+	v1 = a[globalColOrd].toLowerCase();
+  	v2 = b[globalColOrd].toLowerCase();
+  }
+  else if (tipoDado == "numero") {
+	v1 = parseFloat(a[globalColOrd]);
+  	v2 = parseFloat(b[globalColOrd]);
+  }
+  else if (tipoDado == "data") {
+	if ( (a[globalColOrd].split( )).length != 0 ){
+		data = a[globalColOrd].split("/");
+		dia = data[0]; mes = data[1]; ano = data[2].split(" ")[0];
+		tempo = data[2].split(" ")[1];
+		hora = tempo.split(":")[0]; minuto = tempo.split(":")[1]
+		v1 = new Date(ano,mes,dia,hora,minuto,0,0);
+	}
+	else
+	{
+    	data = a[globalColOrd].split("/");
+		dia = data[0]; mes = data[1]; ano = data[2];
+		v1 = new Date(ano,mes,dia,0,0,0,0);
+	}
+	
+	if ( (b[globalColOrd].split( )).length != 0 ){
+		data = b[globalColOrd].split("/");
+		dia = data[0]; mes = data[1]; ano = data[2].split(" ")[0];
+		tempo = data[2].split(" ")[1];
+		hora = tempo.split(":")[0]; minuto = tempo.split(":")[1]
+		v2 = new Date(ano,mes,dia,hora,minuto,0,0);
+	}
+	else {
+		data = b[globalColOrd].split("/");
+		dia = data[0]; mes = data[1]; ano = data[2];
+		v2 = new Date(ano,mes,dia,0,0,0,0);
+	}
+  }
+
+    if ( v1 < v2 ) res = -1;
+    else if ( v1 > v2 ) res = 1;
+    if (globalInverter) res *= -1;
+  
+  return res;
+}
+/****** FIM ORDENACAO *************/
+
+function converteHHMM(val){
+	hora = Math.floor(val/60);
+	minuto = val % 60 ;
+	if (hora <= 9)
+		hora = " 0" + hora;
+	if (minuto <= 9 )
+		minuto = "0" + minuto + " ";
+	return hora + ":" + minuto;
+}
+
+
+// AGENDA - classe -  Ivan Carlos Junges Senior
+function AgendaMed() { // definida para ser um objeto
+	this.dataPrimeiraSemana = null; // data de inicio da primeira semana, essa é igual a dataInicio inicialmente.. mas nunca muda..
+	this.dataUltimaSemana = null; // data de inicio da primeira semana, essa é igual a dataInicio inicialmente.. mas nunca muda..
+	this.dataInicio = null; // data de inicio da agenda, sempre é um dia de domingo
+	this.dataAtual = null; // data de hoje
+	this.horIniAge = 0; // horas em minutos
+	this.horFimAge = 0; // horas em minutos
+	this.durAte = 0; // Duração dos atendimentos
+	this.ficAgendador = 0 // ficha medica do colaborador que esta agendando
+	this.horarios = new Array(new Array(),new Array(),new Array(),new Array(),new Array(),new Array(),new Array());// os sete dias da semana
+	this.agendado = new Array(new Array( new Array(new Array()))); // representa ano[mes[dia[hora]]];
+	// metodo para adicionar os horarios do atendente
+	this.AddHorario = function(semana,horaIni,horaFim) { // metodo
+		this.horarios[(semana - 1)][this.horarios[(semana - 1)].length] = horaIni
+		this.horarios[(semana - 1)][this.horarios[(semana - 1)].length] = horaFim
+	}
+	// metodo para criar a agenda do atendente, seta como ocupado
+	this.Agenda = function(ano,mes,dia,hora,fichaMed) { // metodo
+		mes--;
+		if ( this.agendado[ano] == null)
+			this.agendado[ano] = new Array();
+		if ( this.agendado[ano][mes] == null)
+			this.agendado[ano][mes] = new Array();
+		if (this.agendado[ano][mes][dia] == null)
+			this.agendado[ano][mes][dia] = new Array();	
+		this.agendado[ano][mes][dia][hora] = fichaMed; 
+	}
+	
+	this.MontaTab = function() {
+		
+		//  primeira coisa a fazer é ocultar botoes de navegacao caso seja necessario..
+		if (this.dataPrimeiraSemana.getTime() == this.dataInicio.getTime()){
+			document.getElementById("btn_anterior").style.display = "none";
+		}
+		else document.getElementById("btn_anterior").style.display = "";
+		
+		if (this.dataUltimaSemana.getTime() == this.dataInicio.getTime()){
+			document.getElementById("btn_proximo").style.display = "none";
+		}
+		else document.getElementById("btn_proximo").style.display = "";
+		
+		objTab = document.getElementById("tblAgenda");
+		contLinhas =0 // qtd linhas adicionadas;
+		for (y = this.horIniAge; y < this.horFimAge; y = (y + this.durAte)){
+			var dataIni = new Date(this.dataInicio.toString());
+			var objRow = objTab.insertRow(objTab.rows.length); 
+			contLinhas ++;
+			for (p=0;p<8;p++){
+				if (p==0) {
+					objCell = objRow.insertCell(0)
+					objCell.innerHTML = converteHHMM(y); // Hora
+					objCell.className = "CampoTab";
+				}
+				else{
+					// se for a primeira linha a ser montada coloco data no titulo das colunas
+					if ( contLinhas == 1){
+						if (p==1) diaSemana = "Dom"; else if (p==2) diaSemana = "Seg";else if (p==3) diaSemana = "Ter";else if (p==4) diaSemana = "Qua";else if (p==5) diaSemana = "Qui";else if (p==6) diaSemana = "Sex";else if (p==7) diaSemana = "Sab";
+						document.getElementById("td_" + diaSemana).innerHTML = diaSemana + " <br />" + mascaraData(dataIni);
+						if (dataIni.toString() == this.dataAtual.toString())
+							document.getElementById("td_" + diaSemana).className = "AgdDataHoje";
+						else
+							document.getElementById("td_" + diaSemana).className = "DesCampoTab";
+					}
+					objCell = objRow.insertCell(p); // Domingo
+					objCell.id = "td_" + mascaraData(dataIni) + "_" + y;
+					objCell.className = "agendaIndisponivel";
+					dataIni = proximaData(dataIni);
+				}
+			}
+		}
+	}
+	
+	// metodo que a cor as celulas da tabela
+	this.PintaTab = function() {
+		var dataIni = new Date(this.dataInicio.toString());
+		var dataHoje = this.dataAtual;
+		objTab = document.getElementById("tblAgenda");
+		for ( i=0 ; i < this.horarios.length; i++) {
+			for(x=0 ; x < this.horarios[i].length ; (x+=2)){
+				for (j = this.horarios[i][x]; j < this.horarios[i][(x + 1)]; j+= this.durAte){
+					var hrefAgendar = "<img id=\"img_" + mascaraData(dataIni) + "_" + j + "\" onclick=\"AgeMed.ExeAgenda(this.id)\" src=\"img/space.gif\" onmouseout=\"style.cursor='';\" onmouseover=\"style.cursor='pointer';\" alt=\"\" width=\"100%\" height=\"15\" />"
+					td = document.getElementById("td_" + mascaraData(dataIni) + "_" + j);
+					td.className = "agendaDisponivel";
+					td.innerHTML = hrefAgendar;
+					if (this.agendado[dataIni.getFullYear()] != null) 
+						if (this.agendado[dataIni.getFullYear()][dataIni.getMonth()] != null)
+							if (this.agendado[dataIni.getFullYear()][dataIni.getMonth()][dataIni.getDate()] != null)
+								if (this.agendado[dataIni.getFullYear()][dataIni.getMonth()][dataIni.getDate()][j] != null) { 
+									var codFicha = this.agendado[dataIni.getFullYear()][dataIni.getMonth()][dataIni.getDate()][j];
+									if (codFicha == "OCUPADO"){
+										td.className = "agendaOcupado";
+										td.innerHTML = " ";
+									}
+									else if (codFicha > 0) {
+										td.className = "agendaAgendado";
+										td.innerHTML = hrefAgendar; }
+								}
+				} // for
+			} //for
+			dataIni = proximaData(dataIni);	
+		}
+	}
+	// metodo que executa a acao sobre o dia a ser agendad0
+	this.ExeAgenda = function(idObj){ // passa como parametro o nome do objeto que contem a data e hora
+		// pego a data e hora que desejasse executar acao.
+		// o nome padrao do objeto é img_DD/MM/YYYY_mm
+		var auxArray = idObj.split("_");
+		var auxHora = auxArray[2] ;
+		var auxDia = auxArray[1].split("/")[0];
+		var auxMes = (auxArray[1].split("/")[1] - 1);
+		var auxAno = auxArray[1].split("/")[2];
+		var acao = "";
+		var auxData = new Date(auxAno,auxMes,auxDia,0,0,0,0);
+		// faço algumas consistencias...
+		if (this.dataAtual.getTime() > auxData.getTime()) {
+			alert("Não é possivel agendar para uma data anterior a hoje.");
+			return;
+		}
+		else if (this.dataAtual.getTime() == auxData.getTime()){
+			alert("Não é possivel efetuar agendamento para a data atual;")
+			return;
+		}
+		else if (this.dataAtual.getTime() < auxData.getTime()){
+			// verifico se há agendamento para esta data
+			var codFicha = -1;
+			if (this.agendado[auxData.getFullYear()] != null) 
+				if (this.agendado[auxData.getFullYear()][auxData.getMonth()] != null)
+					if (this.agendado[auxData.getFullYear()][auxData.getMonth()][auxData.getDate()] != null)
+						if (this.agendado[auxData.getFullYear()][auxData.getMonth()][auxData.getDate()][auxHora] != null) { 
+							codFicha = this.agendado[auxData.getFullYear()][auxData.getMonth()][auxData.getDate()][auxHora];
+							if (codFicha > 0) {
+								if (window.confirm("Deseja excluir este agendamento?") == true) {
+									document.getElementById("dataProgramada").value = mascaraData(auxData);
+									document.getElementById("horaProgramada").value = auxHora;
+									document.getElementById("DatIniSem").value = mascaraData(this.dataInicio);
+									acao = "CANCELAR";
+								}
+								else return;
+							}
+						}
+			if (codFicha == -1)
+				if (window.confirm("Deseja agendar esta data?\n" + mascaraData(auxData) + " " + converteHHMM(auxHora) ) == true) {
+					document.getElementById("dataProgramada").value = mascaraData(auxData);
+					document.getElementById("horaProgramada").value = auxHora;
+					document.getElementById("DatIniSem").value = mascaraData(this.dataInicio);
+					acao = "AGENDAR";
+				}
+				else return;
+				
+			if (document.form1.CodAtes.value != ""){
+				document.form1.action = "https://senior.blumenau.sc.gov.br/restrito/conector?ACAO=EXECUTAREGRA&SIS=SM&REGRA=316&STATUS=" + acao + "&CodAte=" + document.form1.CodAtes.value;
+				document.form1.submit();
+				return;
+			}
+			else
+				alert("Não foi processado. Não há um atendente selecionado.");
+		}
+	}
+	// metodo que define na tabela quais as datas que ja estao agendadas.
+	this.mudaSemana = function(acao){
+		var dataIni = new Date(this.dataInicio.toString());
+		if (acao == "proximo"){
+			for (i=0;i<7;i++){ // data inicio deve ser somada 7 vezes para que pule para a proxima semana
+				dataIni = proximaData(dataIni);
+			}
+		}
+		if (acao == "anterior"){
+			for (i=0;i<7;i++){ // data inicio deve ser somada 7 vezes para que pule para a proxima semana
+				dataIni = voltaData(dataIni);
+			}
+		}
+
+		this.dataInicio = dataIni;
+		limpaTabela("tblAgenda");
+		this.MontaTab();
+		this.PintaTab();
+	}
+}
+
+
+function proximaData(data){
+	// verifica se é ano bissexto
+	if ((data.getFullYear() % 4) == 0) {
+		if ((data.getFullYear() % 100) == 0 && (data.getFullYear() % 400) != 0)
+			DOMonth =[31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+		DOMonth =  [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+	} else
+		DOMonth =[31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+	//	 Fim Bissexto
+	
+	if ( (data.getDate() + 1) > DOMonth[data.getMonth()] ) {
+		if ( (data.getMonth() + 1 ) == 12 ){
+			data.setYear(data.getFullYear() + 1);
+			data.setMonth(0);
+			data.setDate(1);
+		}
+		else {
+			data.setDate(1);
+			data.setMonth(data.getMonth() + 1);
+		}
+	}
+	else
+		data.setDate(data.getDate() + 1);
+	return data;
+}
+
+function voltaData(data){
+	// verifica se é ano bissexto
+	if ((data.getFullYear() % 4) == 0) {
+		if ((data.getFullYear() % 100) == 0 && (data.getFullYear() % 400) != 0)
+			DOMonth =[31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+		DOMonth =  [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+	} else
+		DOMonth =[31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+	//	 Fim Bissexto
+
+
+	if ( (data.getDate() - 1) == 0 ) {
+		if ( (data.getMonth() - 1 ) == -1 ){
+			data.setYear(data.getFullYear() - 1);
+			data.setMonth(11);
+			data.setDate(31);
+		}
+		else {
+			data.setMonth(data.getMonth() - 1);
+			data.setDate(DOMonth[data.getMonth()]);
+		}
+	}
+	else
+		data.setDate(data.getDate() - 1);
+	return data;
+}
+
+function mascaraData(data) // converte obj Data para string: dd/mm/yyyy
+{
+	var dia = data.getDate();
+	var mes = (data.getMonth() + 1);
+	var ano = data.getFullYear();
+	if (dia <=9) dia = "0" + dia;
+	if (mes <=9) mes = "0" + mes;
+	return dia + "/" + mes + "/" + ano;
+	
+}

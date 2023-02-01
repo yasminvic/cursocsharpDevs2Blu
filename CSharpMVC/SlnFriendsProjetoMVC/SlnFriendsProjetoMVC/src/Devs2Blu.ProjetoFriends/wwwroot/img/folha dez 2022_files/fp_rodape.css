@@ -1,0 +1,73 @@
+BODY{
+	background-color: Gray;
+}
+
+.TABELARODAPE{
+	width: 900px;
+	height: 15px;
+}
+
+.TABELAUSUARIO{
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 11px;
+}
+.ROTULOUSUARIO{
+  color: #000000;
+}
+.DADOUSUARIO{
+  color: #FFFFFF; 
+  font-weight: bold;
+}
+.TABELAPERFIL{
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 11px;
+}
+.ROTULOPERFIL{
+  color: #000000;
+}
+.DADOPERFIL{
+  color: #FFFFFF; 
+  font-weight: bold;
+}
+.TABELAEMPRESA{
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 11px;
+}
+.ROTULOEMPRESA{
+  color: #000000;
+}
+.DADOEMPRESA{
+  color: #FFFFFF; 
+  font-weight: bold;
+}
+
+.TABELACALCULO{
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 11px;
+}
+.ROTULOCALCULO{
+  color: #000000;
+}
+.DADOCALCULO{
+  color: #FFFFFF; 
+  font-weight: bold;
+}
+.TABELAPERIODO{
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 11px;
+}
+.ROTULOPERIODO{
+  color: #000000;
+}
+.DADOPERIODO{
+  color: #FFFFFF; 
+  font-weight: bold;
+}
+A{
+  color: #000000;
+  text-decoration: underline;
+}
+A:VISITED{
+  color: #000000;
+  text-decoration: underline;
+}

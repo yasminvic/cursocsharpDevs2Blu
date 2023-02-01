@@ -1,0 +1,25 @@
+function TransStr(aID, aText, aConcat){
+  if (aConcat == 1)
+    return aID +" - "+ aText
+  else
+    return aText;
+}
+
+function TransStrFmt(aID, aText, aValues, aConcat){
+var i;      
+var s;                                             
+var xText = aText;
+
+  for (i = 0; i < aValues.length; i++){
+    s = i;
+    s = "%"+ s +"%";
+    do 
+      xText = xText.replace(s, aValues[i])
+    while (xText.indexOf(s) > 0);   
+  }
+  
+  if (aConcat == 1)
+    return aID +" - "+ xText
+  else
+    return xText;
+}
