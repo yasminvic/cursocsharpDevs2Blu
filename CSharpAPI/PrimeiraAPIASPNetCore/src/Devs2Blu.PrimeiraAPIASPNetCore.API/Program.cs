@@ -15,6 +15,8 @@ var connectionStringUser = builder.Configuration.GetConnectionString("SQLServerC
 builder.Services.AddDbContext<SQLServerContext>
     (options => options.UseSqlServer(connectionStringUser));
 
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
