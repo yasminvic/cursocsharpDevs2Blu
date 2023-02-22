@@ -1,12 +1,14 @@
-import { FormComponent } from './components/form/form.component';
+import { DetailsComponent } from './components/details/details.component';
+import { ListComponent } from './components/list/list.component';
 import { HomeComponent } from './components/home/home.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
-  {path: 'form', component: FormComponent},
-  {path: '', redirectTo: '/home', pathMatch: 'full'}
+  {path: '', redirectTo:'/home', pathMatch:'full'},
+  {path: 'list', component: ListComponent},
+  {path: 'detail/:id', component: DetailsComponent},
 ];
 
 @NgModule({
