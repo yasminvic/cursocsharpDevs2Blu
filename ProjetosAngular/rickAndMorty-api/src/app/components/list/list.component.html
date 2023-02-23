@@ -1,0 +1,9 @@
+<h1 class="text-center">Lista de Personagens</h1>
+
+<div class="row">
+  <ul class="list-group">
+    <li *ngFor="let character of resultsCharac" class="list-group-item d-flex justify-between-content">
+      <span>{{character.name}}</span>
+    </li>
+  </ul>
+</div>
