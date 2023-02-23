@@ -1,9 +1,18 @@
 <h1 class="text-center">Lista de Personagens</h1>
 
+
 <div class="row">
-  <ul class="list-group">
-    <li *ngFor="let character of resultsCharac" class="list-group-item d-flex justify-between-content">
-      <span>{{character.name}}</span>
-    </li>
-  </ul>
+<div *ngFor="let character of resultsCharac" class="card mb-3 bg-dark mx-auto mt-5 col-8" style="max-width: 500px;">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img src="{{character.image}}" class="img-fluid float-start rounded-start" alt="{{character.name}}">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title mt-5 text-white">{{character.name}}</h5>
+        <p class="card-text"><small class="text-success">{{character.species}}</small></p>
+      </div>
+    </div>
+  </div>
+</div>
 </div>

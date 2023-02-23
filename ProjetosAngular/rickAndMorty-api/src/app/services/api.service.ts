@@ -15,3 +15,7 @@ export class ApiService {
     return this.http.get<ApiReturn>(this.URL_API);
   }
 }
+
+export class CharacterService{
+  public URL_CHARACTER: string = ""
+}
