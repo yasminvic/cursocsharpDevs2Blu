@@ -1,6 +1,7 @@
 import { ApiReturn } from './../models/api-return';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Pokemon } from '../models/api/pokemon-model';
 
 //quer dizer que pode injetar ele em qualquer lugar
 @Injectable({
@@ -18,6 +19,10 @@ export class ApiService {
     //vai retornar o tipo ApiReturn
     //nesse momento é feito o Bind, ele pega os dados da api e preenche na classe
       return this.http.get<ApiReturn>(this.URL_API);
+  }
+
+  getPokemonByName(name: string){
+    return this.http.get<Pokemon>(`${this.URL_API}/${name}`);
   }
 }
 
