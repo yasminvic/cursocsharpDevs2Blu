@@ -1,0 +1,28 @@
+
+<h1 class="display-1 text-center mb-5 font-title">{{character.name}}</h1>
+
+<div class=" d-flex justify-content-center align-items-center mt-5">
+  <div>
+    <h3 class="text-center mb-5">Dados do Personagem</h3>
+<dl class="row border border-success bg-dark">
+  <dt class="col-sm-3 font-size bg-success w-25">Nome:</dt>
+  <dd class="col-sm-9 font-size border-bottom border-success bg-dark text-white">{{character.name}}</dd>
+  <dt class="col-sm-3 font-size bg-success">Espécie:</dt>
+  <dd class="col-sm-9 font-size border-bottom   border-success bg-dark text-white">{{character.species}}</dd>
+  <dt class="col-sm-3 font-size bg-success">Status:</dt>
+  <dd class="col-sm-9 font-size border-bottom  border-success bg-dark text-white">{{character.status}}</dd>
+  <dt class="col-sm-3 font-size bg-success">Genêro:</dt>
+  <dd class="col-sm-9 font-size border-bottom  border-success bg-dark text-white">{{character.gender}}</dd>
+  <dt class="col-sm-3 font-size bg-success">Origem:</dt>
+  <dd class="col-sm-9 font-size border-bottom  border-success bg-dark text-white">{{character.origin?.name}}</dd>
+  <dt class="col-sm-3 font-size-location bg-success">Localização:</dt>
+  <dd class="col-sm-9 font-size-location text-white">{{character.location?.name}}</dd>
+
+</dl>
+</div>
+
+<div class="float-end ms-5">
+  <img src="{{character.image}}" width="500" height="500">
+</div>
+
+</div>
