@@ -1,15 +1,4 @@
-@font-face {
-  font-family: 'rickandmorty';
-  src: url('../../../assets/fonts/get_schwifty.ttf') format('truetype');
-  font-size: 100em;
-}
 
-
-@font-face {
-  font-family: 'harry';
-  src: url('../../../assets/fonts/HARRYP__.TTF') format('truetype');
-  font-size: 100em;
-}
 
 .font-size{
   font-size:xx-large;
@@ -21,4 +10,9 @@
 
 .font-title{
   font-family: 'rickandmorty';
+  color: #01b0c8;
+  text-shadow: 0 0 0.2em #88b952, 0 0 0.2em #88b952,
+  0 0 0.2em #88b952;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: #c7e399;
 }

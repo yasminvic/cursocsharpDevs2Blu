@@ -16,3 +16,11 @@ li{
 li:hover{
   border-bottom: 2px solid black;
 }
+
+nav {
+  background-color: var(--navbar-scroll);
+  transition: background-color 1s ease;
+  color: var(--navbar-scroll-text);
+  -webkit-box-shadow: var(--navbar-scroll-shadow);
+  box-shadow: var(--navbar-scroll-shadow);
+}

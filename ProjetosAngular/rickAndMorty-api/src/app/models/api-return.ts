@@ -22,6 +22,7 @@ export class Results{
   name?:string;
   image?: string;
   species?: string;
+  status?: string;
 
   constructor(obj: Partial<ApiReturn>){
     Object.assign(this, obj);
