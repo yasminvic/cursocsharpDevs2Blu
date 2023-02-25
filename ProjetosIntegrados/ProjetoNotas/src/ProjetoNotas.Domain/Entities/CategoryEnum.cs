@@ -1,0 +1,16 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ProjetoNotas.Domain.Entities
+{
+    public enum CategoryEnum
+    {
+        Notes = 0,
+        Reminders = 1,
+        Alert = 2,
+
+    }
+}
