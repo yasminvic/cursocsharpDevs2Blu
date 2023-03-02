@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProjetoNotas.Domain.Entities
+namespace ProjetoNotas.Domain.Enums
 {
     public enum CategoryEnum
     {

@@ -7,10 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="SQLServices\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\ProjetoNotas.Domain\ProjetoNotas.Domain.csproj" />
     <ProjectReference Include="..\ProjetoNotas.Infra.Data.Repository\ProjetoNotas.Infra.Data.Repository.csproj" />
   </ItemGroup>
